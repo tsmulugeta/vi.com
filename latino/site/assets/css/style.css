@@ -1,0 +1,16 @@
+@font-face {
+  font-family: "Neuzeit";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../assets/fonts/neuzeitgro/reg/neuzeitgroreg?#iefix") format("embedded-opentype"), url("../assets/fonts/neuzeitgro/reg/neuzeitgroreg.woff") format("woff"), url("../assets/fonts/neuzeitgro/reg/neuzeitgroreg.ttf") format("truetype"), url("../assets/fonts/neuzeitgro/reg/neuzeitgroreg.svg#Neuzeit") format("svg")}
+  
+ @font-face {
+  font-family: "Helveticaneue";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../assets/fonts/neuzeitgro/reg/helveticaneue?#iefix") format("embedded-opentype"), url("../assets/fonts/neuzeitgro/reg/helveticaneue.woff") format("woff"), url("../assets/fonts/neuzeitgro/reg/helveticaneue.ttf") format("truetype"), url("../assets/fonts/neuzeitgro/reg/helveticaneue") format("svg")}
+  
+  
+h1, h2, h3, h4 {color: #74ad30; font-family: "Neuzeit", Sans-Serif;}
+h3 {color: #333; font-family: "Neuzeit", Sans-Serif;}
+body {font-family: "Helveticaneue", Sans-Serif;}

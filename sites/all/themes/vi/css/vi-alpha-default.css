@@ -1,0 +1,108 @@
+@import "elements.less";
+@import "vi.less";
+@import "variables.less";
+
+/* This file will hold styles for all layouts using the alpha grid (i.e. not the mobile layout). */
+
+/*.no-show{display:block}
+.no-show img{display:block}
+
+.absolute-bottom{position:absolute;bottom:0;right:0}*/
+
+/*Quicktabs*/
+
+/*ul.quicktabs-tabs li,
+body.context-community ul.quicktabs-tabs li{-webkit-border-radius:5px 5px 0 0;-moz-border-radius:5px 5px 0 0;border-radius:5px 5px 0 0;padding:7px 10px 10px;margin-left:2px;font-size:14px}
+
+body.context-community ul.quicktabs-tabs li.first{margin-left:20px}*/
+
+/* #Content Section
+================================================== */
+/*body.front .view-promotions div{background:transparent url('/sites/default/files/shadow_pods.png') 50% 100% no-repeat}*/
+
+/* #Links
+================================================== */
+
+/* #Helper Class
+================================================== */
+
+/* #Gradients
+================================================== */
+
+/* #Responsive Video Styling
+================================================== */
+
+/* #Box Styling
+================================================== */
+
+/* #Header Section
+================================================== */
+
+/* Social Links */
+
+/* #Menu Section
+================================================== */
+  
+/* #Content Section
+================================================== */
+
+/* #Footer Section
+================================================== */
+
+/* timer numbers */
+.countdown-box{margin:0 0 0 30px}
+.numbers{font-family:"Neuzeit";font-size:61px;color:#74ad30;line-height:20px;text-align:center;padding:35px 10px 10px;float:left}
+	
+.days{font-size:12px;color:#666;text-shadow:none;line-height:20px;text-transform:uppercase}
+	
+/******************************************************************** New Challenge Page *************************************************************/
+.page-node-11 .ds-section1, .page-node-1684 .ds-section1{background:no-repeat scroll url('/sites/default/files/visalus_newchallenge_header.jpg') 45% 0 #000;max-height:360px}
+.page-node-11 .ds-section5, .page-node-662 .ds-section5, .page-node-1684 .ds-section5{background:no-repeat scroll url('/sites/default/files/visalus_newchallenge_footer.jpg') 45% 0 #000;min-height:238px}
+.page-node-11 .ds-section6, .page-node-662 .ds-section6, .page-node-1684 .ds-section6 {background: #2d2d2d;}
+.page-node-11 .ds-section5 .meet-champions-text, .page-node-662 .ds-section5 .meet-champions-text, .page-node-1684 .ds-section5 .meet-champions-text{padding-top:80px;padding-left:370px; max-width:450px}
+
+/**** Challenge page Spanish **/
+.page-node-662 .ds-section1{background:no-repeat scroll url('/sites/default/files/visalus_newchallenge_header_sp.jpg') 45% 0 #000;max-height:360px}
+
+/************************************************************************* Prizes *******************************************************************/
+.page-node-1355 .ds-section1, .page-node-1513 .ds-section1{background:no-repeat scroll url('/sites/default/files/prizes/visalus_prizes_header1.jpg') 45% 0 #000;min-height:350px}
+.page-node-1686 .ds-section1{background:no-repeat scroll url('/sites/default/files/prizes/visalus_prizes_header1_fr.jpg') 45% 0 #000;min-height:350px}
+
+
+.page-node-1355 .ds-section2, .page-node-1513 .ds-section2, .page-node-1686 .ds-section2{background:#fff;min-height:419px}
+.page-node-1355 .ds-section3, .page-node-1686 .ds-section3{background:no-repeat scroll url('/sites/default/files/prizes/visalus_prizes_header2.jpg') 45% 0 #fff;min-height:425px}
+.page-node-1355 .ds-section4, .page-node-1513 .ds-section4, .page-node-1686 .ds-section4{background:no-repeat scroll url('/sites/default/files/prizes/visalus_prizes_header3.jpg') 45% 0 #fff;min-height:483px}
+.page-node-1355 .ds-section5, .page-node-1513 .ds-section5, .page-node-1686 .ds-section5{background:no-repeat scroll url('/sites/default/files/prizes/visalus_prizes_victory.jpg') 45% 0 #000;min-height:215px}
+
+/*SPANISH*/
+.page-node-1513 .ds-section3 {background:no-repeat scroll url('/sites/default/files/prizes/visalus_prizes_header2_sp.jpg') 45% 0 #fff;min-height:425px}
+
+/*.meet-champions-text span{font-size:35px;line-height:35px}*/
+
+/********************************************************************** nst la  ********************************************************************/
+.page-node-1514 #zone-content-wrapper{background:url("/sites/default/files/visalus_nstla_header_sp.jpg") no-repeat scroll center top transparent;height:auto;min-height:250px}
+
+/***************************************************************** spanish  nst la  *****************************************************************/
+.page-node-1320 #zone-content-wrapper{background:url("/sites/default/files/nstatlanta/nst_atlanta_bg.jpg") no-repeat scroll center top #000;height:auto;min-height:250px}
+
+/******************************************************************* vitality 2013  ******************************************************************/
+.page-node-1551 #zone-content-wrapper{background:url("/sites/default/files/visalus_vitality_header.jpg") no-repeat scroll center top #000;height:auto;min-height:250px}
+/******************************************************************* vitality 2013 sp ******************************************************************/
+.page-node-1560 #zone-content-wrapper{background:url("/sites/default/files/vitality2013/event_vitality_ntl_sp.jpg") no-repeat scroll center top #000;height:auto;min-height:250px}
+/******************************************************************* vitality 2013 fr ******************************************************************/
+.page-node-1795 #zone-content-wrapper{background:url("/sites/default/files/visalus_vitality_header_frn.jpg") no-repeat scroll center top #000;height:auto;min-height:250px}
+
+/* NATIONAL DIRECTOR PAGE & EXPERIENCE PAGE */
+.page-node-1570 #zone-content-wrapper{background:url("/sites/default/files/ndexperience/ndexperience_header_eng.jpg") no-repeat scroll center top #000;height:auto;min-height:428px}
+
+.page-node-1571 #zone-content-wrapper{
+background:url("/sites/default/files/ndexperience/ndexperience_header_spn.jpg") no-repeat scroll center top #000;height:auto;min-height:428px}
+
+.page-node-1796  #zone-content-wrapper{background:url("/sites/default/files/ndexperience/ndexperience_header_frn.jpg") no-repeat scroll center top #000;height:auto;min-height:428px}
+
+/* vi trim group offer buttons  offers.vi.com */
+.offer-btn{margin-left:160px;margin-top:-180px}
+
+.main-hide {display: none;}
+
+#swipe_bg{background-image:url("/sites/default/files/visalus_swipe_bg.jpg");background-repeat:no-repeat;width:1020px;height:407px}

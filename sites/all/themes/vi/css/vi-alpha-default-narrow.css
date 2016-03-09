@@ -1,0 +1,531 @@
+/* This file will hold styles that are loaded using the same media query as the narrow grid. */
+/* If you are using the default media queries provided by Omega, these styles will also
+ *  apply to the normal and widescreen layouts. You may override these styles in the normal 
+ *  and widescreen CSS files as appropriate. */
+
+/*
+
+
+/* #General
+================================================== */
+
+
+body {text-align: left;}
+
+ul, ol {display: block;}
+
+
+/* #Layout
+================================================== */
+
+
+.ds-section {padding: 0px 0px;}
+
+
+/* #Header
+================================================== */
+
+
+/* #Product Page
+================================================== */
+
+.masonry-item, .packery-item {width: 50%;}
+
+
+
+/* #Footer
+================================================== */
+
+
+#zone-footer {width: auto;}
+#zone-footer .grid-6 {width: auto; float: none;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***************** Homepage  ************************************************************/
+
+
+li.vitailityslide img {width: auto;}
+li.vitailityslide ul.date {margin-left: 15px;}
+li.vitailityslide ul.date li {display: inline-block; padding: 0px 0px;}
+li.vitailityslide ul.date li.divider {display: inline-block;}
+
+
+/***************** July 2014 Bogo Pages - ENGLISH - CA ENGLISH *************************/
+
+.page-node-2213 .ds-section1 {height:538px; background:#86ebfe url("/sites/default/files/bogo/bg_beach_en.jpg") no-repeat center top;}
+.page-node-2216 .ds-section1 {height:538px; background:#86ebfe url("/sites/default/files/bogo/bg_beach_fr.jpg") no-repeat center top;}
+  .page-node-2213 .ds-section1 .grid-12, .page-node-2216 .ds-section1 .grid-12 {padding-top: 35px; text-align: left;}
+      .page-node-2213 .ds-section1 span, .page-node-2216 .ds-section1 span {font-size: 29px;}
+      .page-node-2213 .ds-section1 h1, .page-node-2213 .ds-section1 h2, .page-node-2216 .ds-section1 h1, .page-node-2216 .ds-section1 h2 {font-size: 65px; line-height: 60px; opacity: 0.8;}
+      .page-node-2213 .ds-section1 h1, .page-node-2216 .ds-section1 h1 {font-size: 78px;}
+      .page-node-2213 .ds-section1 h3, .page-node-2216 .ds-section1 h3 {font-size: 37px;}
+      .page-node-2213 .ds-section1 .products, .page-node-2216 .ds-section1 .products {margin: 15px 0px 25px; width: 480px; font-size: 88px; line-height: 148px;}
+        .page-node-2213 .ds-section1 img.bottle, .page-node-2216 .ds-section1 img.bottle {width: 62px;}
+        .page-node-2213 .ds-section1 img.box, .page-node-2216 .ds-section1 img.box {width: 179px;}
+          .page-node-2213 .ds-section1 .circle {position: static; width: 125px; height: 125px; font-size: 23px; line-height: 28px; margin-top: 20px;}
+          .page-node-2216 .ds-section1 .circle {position: static; width: 125px; height: 125px; font-size: 21px; line-height: 22px; margin-top: 20px;}
+              .page-node-2213 .ds-section1 .circle p {margin: 0px; padding-top: 31px;}
+              .page-node-2216 .ds-section1 .circle p {margin: 0px; padding-top: 25px;}
+      .page-node-2213 .ds-section1 a, .page-node-2216 .ds-section1 a {width: 213px; font-size: 29px; line-height: 45px; margin: 15px 0px;}
+.page-node-2213 .ds-section2, .page-node-2216 .ds-section2 {font-size: 24px; line-height: 28px;}
+  .page-node-2213 .ds-section2 #countdown, .page-node-2216 .ds-section2 #countdown {font-size: 30px;}
+  .page-node-2213 .ds-section2 p, .page-node-2216 .ds-section2 p {margin: 25px 0px 25px;}
+.page-node-2213 .ds-section3, .page-node-2216 .ds-section3 {}
+    .page-node-2213 .ds-section3 .grid-12, .page-node-2216 .ds-section3 .grid-12 {padding-top: 35px;}
+      .page-node-2213 .ds-section3 .title, .page-node-2216 .ds-section3 .title {padding: 25px 0px 15px;}
+      .page-node-2213 .ds-section3 .product-img, .page-node-2216 .ds-section3 .product-img {height: 148px;}
+        .page-node-2213 .ds-section3 span, .page-node-2216 .ds-section3 span {font-size: 18px;}
+.page-node-2213 .ds-section4, .page-node-2216 .ds-section4 {padding-top: 25px;}
+  .page-node-2213 .ds-section4 p, .page-node-2216 .ds-section4 p {font-size: 16px;}
+  .page-node-2213 .ds-section4 .explanation, .page-node-2216 .ds-section4 .explanation {float: left; font-size: 16px; margin-left: 20px; margin-top: -15px;}
+  .page-node-2213 .ds-section4 .buy-now-btn, .page-node-2216 .ds-section4 .buy-now-btn {margin-top: 15px;}
+    .page-node-2213 .ds-section4 input.input-medium, .page-node-2216 .ds-section4 input.input-medium {
+      width: 539px; height: 28px; margin: 9px 0px;
+    }
+    .page-node-2213 .ds-section4 input.input-medium:last-child, .page-node-2216 .ds-section4 input.input-medium:last-child {margin-bottom: 35px;}
+  .page-node-2213 .ds-section4 button, .page-node-2216 .ds-section4 button {float: left; width: 221px; line-height: 51px; font-size: 26px;}
+  .page-node-2213 .ds-section4 form, .page-node-2216 .ds-section4 form {margin: 0 0 30px;}
+
+/***************** July 2014 Bogo Pages - SPANISH *************************/
+
+.page-node-2214 .ds-section1 {height:538px; background:#86ebfe url("/sites/default/files/bogo/bg_beach_es.jpg") no-repeat center top;}
+  .page-node-2214 .ds-section1 .grid-12 {padding-top: 13px; text-align: left;}
+      .page-node-2214 .ds-section1 span {font-size: 24px; line-height: 18px;}
+      .page-node-2214 .ds-section1 h1, .page-node-2214 .ds-section1 h2 {font-size: 52px; line-height: 55px; opacity: 0.8;}
+      .page-node-2214 .ds-section1 h1 {font-size: 69px;}
+      .page-node-2214 .ds-section1 h3 {font-size: 39px;}
+      .page-node-2214 .ds-section1 .products {margin: 15px 0px 25px; width: 500px; font-size: 88px; line-height: 148px;}
+        .page-node-2214 .ds-section1 img.bottle {width: 62px;}
+        .page-node-2214 .ds-section1 img.box {width: 179px;}
+          .page-node-2214 .ds-section1 .circle {position: static; width: 125px; height: 125px; font-size: 20px; line-height: 22px; margin-top: 20px;}
+              .page-node-2214 .ds-section1 .circle p {margin: 0px; padding-top: 28px;}
+      .page-node-2214 .ds-section1 a {width: 213px; font-size: 29px; line-height: 45px; margin: 15px 0px;}
+.page-node-2214 .ds-section2 {font-size: 24px; line-height: 28px;}
+  .page-node-2214 .ds-section2 #countdown {font-size: 30px;}
+  .page-node-2214 .ds-section2 p {margin: 25px 0px 25px;}
+.page-node-2214 .ds-section3 {}
+    .page-node-2214 .ds-section3 .grid-12 {padding-top: 35px;}
+      .page-node-2214 .ds-section3 .title {padding: 25px 0px 15px;}
+      .page-node-2214 .ds-section3 .product-img {height: 148px;}
+        .page-node-2214 .ds-section3 span {font-size: 18px;}
+.page-node-2214 .ds-section4 {padding-top: 25px;}
+  .page-node-2214 .ds-section4 p {font-size: 16px;}
+  .page-node-2214 .ds-section4 .explanation {float: left; font-size: 16px; margin-left: 20px; margin-top: -15px;}
+  .page-node-2214 .ds-section4 .buy-now-btn {margin-top: 15px;}
+    .page-node-2214 .ds-section4 input.input-medium {
+      width: 539px; height: 28px; margin: 9px 0px;
+    }
+    .page-node-2214 .ds-section4 input.input-medium:last-child {margin-bottom: 35px;}
+  .page-node-2214 .ds-section4 button {float: left; width: 221px; line-height: 51px; font-size: 26px;}
+  .page-node-2214 .ds-section4 form {margin: 0 0 30px;}
+
+/***************** July 2014 Bogo Pages - FRENCH *************************/
+
+.page-node-2215 .ds-section1 {height:538px; background:#86ebfe url("/sites/default/files/bogo/bg_beach_fr.jpg") no-repeat center top;}
+  .page-node-2215 .ds-section1 .grid-12 {padding-top: 13px; text-align: left;}
+      .page-node-2215 .ds-section1 span {font-size: 22px; line-height: 18px;}
+      .page-node-2215 .ds-section1 h1, .page-node-2215 .ds-section1 h2 {font-size: 50px; line-height: 55px; opacity: 0.8;}
+      .page-node-2215 .ds-section1 h1 {font-size: 65px;}
+      .page-node-2215 .ds-section1 h3 {font-size: 39px;}
+      .page-node-2215 .ds-section1 .products {margin: 15px 0px 25px; width: 500px; font-size: 88px; line-height: 148px;}
+        .page-node-2215 .ds-section1 img.bottle {width: 62px;}
+        .page-node-2215 .ds-section1 img.box {width: 179px;}
+          .page-node-2215 .ds-section1 .circle {position: static; width: 125px; height: 125px; font-size: 20px; line-height: 22px; margin-top: 20px;}
+              .page-node-2215 .ds-section1 .circle p {margin: 0px; padding-top: 32px;}
+      .page-node-2215 .ds-section1 a {width: 365px; font-size: 29px; line-height: 45px; margin: 15px 0px;}
+.page-node-2215 .ds-section2 {font-size: 24px; line-height: 28px;}
+  .page-node-2215 .ds-section2 #countdown {font-size: 30px;}
+  .page-node-2215 .ds-section2 p {margin: 25px 0px 25px;}
+.page-node-2215 .ds-section3 {}
+    .page-node-2215 .ds-section3 .grid-12 {padding-top: 35px;}
+      .page-node-2215 .ds-section3 .title {padding: 25px 0px 15px;}
+      .page-node-2215 .ds-section3 .product-img {height: 148px;}
+        .page-node-2215 .ds-section3 span {font-size: 18px;}
+.page-node-2215 .ds-section4 {padding-top: 25px;}
+  .page-node-2215 .ds-section4 p {font-size: 16px;}
+  .page-node-2215 .ds-section4 .explanation {float: left; font-size: 16px; margin-left: 0px; margin-top: 20px;}
+  .page-node-2215 .ds-section4 .buy-now-btn {margin-top: 15px;}
+    .page-node-2215 .ds-section4 input.input-medium {
+      width: 539px; height: 28px; margin: 9px 0px;
+    }
+    .page-node-2215 .ds-section4 input.input-medium:last-child {margin-bottom: 35px;}
+  .page-node-2215 .ds-section4 button {float: left; width: 349px; line-height: 51px; font-size: 26px;}
+  .page-node-2215 .ds-section4 form {margin: 0 0 30px;}  
+
+/***************** Bogo Pages  *************************/
+
+.page-node-2192 .ds-section1 h2, .page-node-2193 .ds-section1 h2, .page-node-2192 .ds-section1 h2, .page-node-2194 .ds-section1 h2 
+  {font-size:32px; line-height:34px;}
+.page-node-2192 .ds-section1 h1 
+  {font-size:48px; line-height:50px; margin:50px 0px 5px;}
+.page-node-2193 .ds-section1 h1 
+  {font-size:45px; line-height:48px; margin:50px 0px 5px;}
+.page-node-2194 .ds-section1 h1 
+  {font-size:42px; line-height:46px; margin:50px 0px 5px;}
+.page-node-2192 .ds-section1 .products .red-circle {
+  width:129px; height:129px; font-size:30px; line-height:32px; top:65px;
+}
+    .page-node-2192 .ds-section1 .products .red-circle div {padding-top:35px;}
+.page-node-2193 .ds-section1 .products .red-circle {
+  width:129px; height:129px; font-size:30px; line-height:34px; top:55px;
+}
+    .page-node-2193 .ds-section1 .products .red-circle div {padding-top:35px;}
+.page-node-2194 .ds-section1 .products .red-circle {
+  width:129px; height:129px; font-size:20px; line-height:26px; top:60px; right:20px;
+}
+    .page-node-2194 .ds-section1 .products .red-circle div {padding-top:36px;}
+
+.page-node-2192 .ds-section1 a {font-size:28px; width:220px; line-height: 49px; margin:25px 0px;}
+.page-node-2193 .ds-section1 a {font-size:26px; width:300px; line-height: 49px; margin:25px 0px;}
+.page-node-2194 .ds-section1 a {font-size:25px; width:330px; line-height: 45px; margin:25px 0px;}
+
+/***************** Go 6-0  *************************/
+
+.page-node-2164 h1, .page-node-2165 h1, .page-node-2167 h1 {	
+	font-size: 50px;
+	font-weight: bold;
+	color: #FFF;
+	line-height: 50px;
+	margin: 105px 0 0;
+}
+
+.page-node-2164 .ds-section1,
+.page-node-2165 .ds-section1,
+.page-node-2167 .ds-section1 {
+  height: 450px; background: #27282a url("/sites/default/files/go-60/banner.jpg") no-repeat center top; 
+} 
+  .page-node-2164 .ds-section1 .grid-6.alpha span,
+  .page-node-2165 .ds-section1 .grid-6.alpha span,
+  .page-node-2167 .ds-section1 .grid-6.alpha span {font-size: 105px; line-height: 75px;}
+  .page-node-2164 .ds-section1 .grid-6 .circle {
+      width: 262px; height: 262px; font-size: 24px; line-height: 25px; margin-top: 0px;
+  }
+  .page-node-2165 .ds-section1 .grid-6 .circle {
+      width: 262px; height: 262px; font-size: 18px; line-height: 20px; margin-top: 0px;
+  }
+  .page-node-2167 .ds-section1 .grid-6 .circle {
+      width: 262px; height: 262px; font-size: 18px; line-height: 20px; margin-top: 0px;
+  }
+    .page-node-2164 .ds-section1 .grid-6 .circle a {padding: 49px 5px 0px;}
+    .page-node-2165 .ds-section1 .grid-6 .circle a {padding: 44px 5px 0px;}
+    .page-node-2167 .ds-section1 .grid-6 .circle a {padding: 44px 5px 0px;}
+    .page-node-2164 .ds-section1 .grid-6.omega a,
+    .page-node-2165 .ds-section1 .grid-6.omega a,
+    .page-node-2167 .ds-section1 .grid-6.omega a {cursor: pointer; padding-top: 240px; padding-left: 0px; margin-top: 0px; display: block;}
+      .page-node-2164 .ds-section1 .grid-6.omega a img,
+      .page-node-2165 .ds-section1 .grid-6.omega a img,
+      .page-node-2167 .ds-section1 .grid-6.omega a img {width:141px;}
+        .page-node-2164 .ds-section1 .grid-6 .circle b {font-size: 28px; line-height: 30px;}
+        .page-node-2165 .ds-section1 .grid-6 .circle b {font-size: 23px; line-height: 26px;}
+        .page-node-2167 .ds-section1 .grid-6 .circle b {font-size: 23px; line-height: 26px;}
+        .page-node-2164 .ds-section1 .grid-6 .circle h1 {font-size: 44px; line-height: 46px;}
+        .page-node-2165 .ds-section1 .grid-6 .circle h1 {font-size: 34px; line-height: 32px;}
+        .page-node-2167 .ds-section1 .grid-6 .circle h1 {font-size: 34px; line-height: 32px;}
+.page-node-2164 #myModal-learn-more,
+.page-node-2165 #myModal-learn-more,
+.page-node-2167 #myModal-learn-more {width: 674px; min-height: 560px;}         
+
+/********* I challenge you  **********/
+
+.page-node-2056 .ds-section1, 
+.page-node-2067 .ds-section1,
+.page-node-2068 .ds-section1,
+.page-node-2124 .ds-section1, .page-node-2295 .ds-section1 {height: 350px; font-size: 18px;}
+
+  .page-node-2056 .ds-section1 .cover, 
+  .page-node-2067 .ds-section1 .cover,
+  .page-node-2068 .ds-section1 .cover,
+  .page-node-2124 .ds-section1 .cover, .page-node-2295 .ds-section1 .cover {display: none;}
+
+  .page-node-2056 .ds-section1 .grid-6.alpha {padding-top: 30px; width: 340px; position: static;}
+  .page-node-2067 .ds-section1 .grid-6.alpha {padding-top: 85px; width: 340px; position: static;}
+  .page-node-2068 .ds-section1 .grid-6.alpha {padding-top: 58px; width: 340px; position: static;}
+  .page-node-2124 .ds-section1 .grid-6.alpha {padding-top: 25px; width: 340px; position: static;}
+  .page-node-2295 .ds-section1 .grid-6.alpha {padding-top: 25px; width: 340px; position: static;}
+
+    .page-node-2056 .ds-section1 span {font-size: 24px; line-height: 28px; color: #ecf13d;}
+    .page-node-2067 .ds-section1 span,
+    .page-node-2068 .ds-section1 span,
+    .page-node-2124 .ds-section1 span, .page-node-2295 .ds-section1 span {font-size: 24px; color: #ecf13d;}
+
+    .page-node-2056 .ds-section1 h1 {font-size: 62px; line-height: 54px;}
+    .page-node-2067 .ds-section1 h1 {font-size: 58px; line-height: 48px;}
+    .page-node-2068 .ds-section1 h1 {font-size: 48px; line-height: 48px;}
+    .page-node-2124 .ds-section1 h1 {font-size: 52px; line-height: 48px;}
+    .page-node-2295 .ds-section1 h1 {font-size: 52px; line-height: 48px;}
+
+    .page-node-2056 .ds-section1 a.play-btn, 
+    .page-node-2067 .ds-section1 a.play-btn,
+    .page-node-2068 .ds-section1 a.play-btn,
+    .page-node-2124 .ds-section1 a.play-btn, .page-node-2295 .ds-section1 a.play-btn  {font-size: 17px; padding-top: 120px; margin-top: -30px;}
+
+    .page-node-2056 .ds-section1 .grid-6.omega img, 
+    .page-node-2067 .ds-section1 .grid-6.omega img,
+    .page-node-2068 .ds-section1 .grid-6.omega img,
+    .page-node-2124 .ds-section1 .grid-6.omega img, .page-node-2295 .ds-section1 .grid-6.omega img {margin-left: -50px;}
+
+    .page-node-2056 .ds-section1 .circle, 
+    .page-node-2067 .ds-section1 .circle, 
+    .page-node-2068 .ds-section1 .circle,
+    .page-node-2124 .ds-section1 .circle, .page-node-2295 .ds-section1 .circle {
+      background:#ecf13d; color:#000; text-align: center; font-size: 18px;
+      position: absolute; top: 90px; right: -38px; width: 166px; height: 166px;
+    }
+        .page-node-2056 .circle > div, 
+        .page-node-2067 .circle > div, 
+        .page-node-2068 .circle > div {padding-top: 30px;}
+        .page-node-2124 .circle > div {padding-top: 25px;}
+        .page-node-2295 .circle > div {padding-top: 25px;}
+
+.page-node-2056 .ds-section3, 
+.page-node-2067 .ds-section3, 
+.page-node-2068 .ds-section3,
+.page-node-2124 .ds-section3, .page-node-2295 .ds-section3 { 
+  margin: 40px 0px 70px; 
+}
+  .page-node-2056 .ds-section3 .field-item .grid-12:first-child, 
+  .page-node-2067 .ds-section3 .field-item .grid-12:first-child, 
+  .page-node-2068 .ds-section3 .field-item .grid-12:first-child,
+  .page-node-2124 .ds-section3 .field-item .grid-12:first-child,
+  .page-node-2295 .ds-section3 .field-item .grid-12:first-child  {
+      margin-bottom: 50px;
+  }
+  .page-node-2056 .ds-section3 h2 {font-size: 22px; line-height: 28px;  width: auto; padding-top: 26px;}
+  .page-node-2067 .ds-section3 h2 {font-size: 22px; line-height: 28px;  width: auto; padding-top: 16px;}
+  .page-node-2068 .ds-section3 h2 {font-size: 22px; line-height: 28px;  width: auto; padding-top: 30px;}
+  .page-node-2295 .ds-section3 h2 {font-size: 22px; line-height: 28px;  width: auto; padding-top: 30px;}
+
+  .page-node-2056 .ds-section3 .circle, 
+  .page-node-2067 .ds-section3 .circle, 
+  .page-node-2068 .ds-section3 .circle,
+  .page-node-2124 .ds-section3 .circle,
+  .page-node-2295 .ds-section3 .circle {
+    font-size: 45px; top: -74px; left: -27px; width: 72px; height: 72px; line-height: 72px;
+  }
+
+.page-node-2056 .ds-section4 h1, 
+.page-node-2067 .ds-section4 h1,
+.page-node-2067 .ds-section4 h1,
+.page-node-2124 .ds-section4 h1,
+.page-node-2295 .ds-section4 h1 {font-size: 58px;}
+
+.page-node-2056 .ds-section4 h2, 
+.page-node-2067 .ds-section4 h2,
+.page-node-2068 .ds-section4 h2,
+.page-node-2124 .ds-section4 h2,
+.page-node-2295 .ds-section4 h2  {font-size: 37px; line-height: 40px;}  
+
+.page-node-2056 .ds-section4 ul, 
+.page-node-2067 .ds-section4 ul,
+.page-node-2068 .ds-section4 ul,
+.page-node-2124 .ds-section4 ul,
+.page-node-2295 .ds-section4 ul {margin-top: 40px;}
+
+.page-node-2056 .red-strip, 
+.page-node-2067 .red-strip {line-height:80px; padding:0px;}
+.page-node-2068 .red-strip,
+.page-node-2124 .red-strip, .page-node-2295 .red-strip {line-height:35px; padding:0px;}
+      .page-node-2056 .red-strip .grid-12 {
+        background: url("/sites/default/files/challengeyou/arrow_fade.png") no-repeat 144px top;
+      }
+      .page-node-2067 .red-strip .grid-12 {
+        background: url("/sites/default/files/challengeyou/arrow_fade.png") no-repeat 158px top;
+      }
+      .page-node-2068 .red-strip .grid-12,
+      .page-node-2124 .red-strip .grid-12,
+      .page-node-2295 .red-strip .grid-12 {
+        background: none;
+      }
+      .page-node-2056 .red-strip a, 
+      .page-node-2067 .red-strip a,
+      .page-node-2068 .red-strip a,
+      .page-node-2124 .red-strip a,
+      .page-node-2295 .red-strip a {display:inline-block; padding-left: 50px; position:relative; left: 10px;}
+
+.page-node-2056 .ds-section5 {height:80px;}
+.page-node-2067 .ds-section5 {}
+.page-node-2068 .ds-section5 {height:auto; padding:20px 0px;}
+.page-node-2124 .ds-section5 {height:auto; padding:20px 0px;}
+.page-node-2295 .ds-section5 {height:auto; padding:20px 0px;}
+
+ul.image-feed li {float:left;}
+    ul.image-feed li:nth-child(4n) {padding-right:0px;}
+    ul.image-feed li:first-child, ul.image-feed li:nth-child(5n) {padding-left:0px;}
+
+.page-node-2056 .ds-section6 h2, 
+.page-node-2067 .ds-section6 h2,
+.page-node-2068 .ds-section6 h2,
+.page-node-2124 .ds-section6 h2,
+.page-node-2295 .ds-section6 h2 {font-family: 'Neuzeit-black'; font-size: 24px;}   
+
+/********* LID Leaderboard  **********/
+
+.page-node-2217 .table-wrapper {overflow-x: visible; white-space: normal;}
+.page-node-2217 .table-wrapper-inner {display:block; width: 100%;}
+
+/***************** ViBites Downloads  **************************************************/
+
+  #node-page-2225 h2 {text-align: left;}
+
+/***************** ViBites  ************************************************************/
+
+#main #vibites-header .product-bg-main {height: 330px;}
+#vibites-header .product-bg-main a.play-btn {
+  background: url("/sites/default/files/btn_play_arrow.png") no-repeat top center; margin-top: 65px; padding: 140px 0px 0px;
+}
+    #vibites-header .product-bg {text-align: left; height: 200px;}
+            #vibites-header .product-bg img {position: absolute; top: 35px; right: 15%; padding: 0px;}
+                  #vibites-header .product-bg img.natural {right: 10%;}     
+                  #vibites-header .product-bg img.left {position: absolute; top: 25px; left: 0px;}
+        #vibites-header .product-bg .container-12 {padding: 0px;}
+        ul.vibite-buttons li {margin: 0px 5px;}   
+            #vibites-content ul.vibite-buttons img {width: 75%;}
+    #vibites-header .sticker {position: absolute; right: 20px;}  
+                #vibites-header .product-bg .vibites-logo-text ul li {padding: 0px;}
+    #vibites-header .solid-bg {padding: 35px 0px; text-align: left;}                              
+
+/********* Mastermind  **********/
+
+  .mastermind-banner {padding: 35px 0px 35px; text-align: left;}
+    .mastermind-banner h3 {position: absolute; top: 0px; right: 0px; font-size: 30px; line-height: 32px; margin: 10px 0;}
+    .mastermind-banner img.year {width: auto;}
+
+/********* NST Event Page  **********/
+
+.nst-event-page .ds-section1 {text-align: left;}   
+      .nst-event-page .ds-section1 .grid-6.logo-outer {text-align: right;} 
+      .nst-event-page .ds-section1 h3 {font-family: 'Neuzeit'; font-size: 32px; margin: 0px 0px 5px; text-shadow: black 0.0em 0.0em 0.0em;}
+
+
+/* #Gradients
+================================================== */
+
+/* #Responsive Video Styling
+================================================== */
+
+/* #Box Styling
+================================================== */
+
+/* #Header Section
+================================================== */
+
+/* Social Links */
+
+/* Logo 
+body.logged-in .block-block-1 .block-inner .content img{
+  height: auto;
+  position: absolute;
+  top: -20px;
+  width:100px}
+
+.block-block-1 .block-inner .content img{
+  height: auto;
+  position: absolute;
+  top: 0;
+  width:100px}*/
+
+/* #Menu Section
+================================================== */
+/* Menus */
+
+/*.block-menu-block-3 ul.menu li a{padding:15px 15px;font-size:11px}
+.block-menu-block-4 ul.menu li a{font-size:10px}*/
+
+/*.block-block-47 ul li a{display:block;background: #b2b3b6;color:#fff;font-size: 9px;padding:12px 5px;font-weight:bold}*/
+  
+/* #Content Section
+================================================== */
+
+/*.challenge-kits{float:left;width:140px;text-align:center}
+
+#edit-tid-35 a,
+#edit-tid-36 a,
+#edit-tid-37 a,
+#edit-tid-38 a{color: #FFFFFF;display: block;font-weight: bold;height: 0;padding-top: 84px;text-align: center;text-transform: uppercase;width: 160px}
+*/
+
+
+/* #Footer Section
+================================================== */
+	
+/*.meet-champions-text{padding-top:80px;padding-left:270px;max-width:450px;}*/
+
+/* challenge qr landing pages mobile  */
+/*#challengeshowdown-landing-header-bg {background: no-repeat url('/sites/default/files/visalus_landing_challenge_showdown_bg2.jpg') 45% 0 #000;height: 636px;max-width: 100%}*/
+
+/*.hide-on-full {display: none;}
+.main-hide {display: none;}*/
+
+/* vi trim group offer buttons  offers.vi.com */
+/*.offer-btn{margin-left: 100px;margin-top: -130px}*/
+
+
+/***************** The British ISLES VS CONTINENTAL EUROPE TOP 1000 *************************/
+
+.page-node-2219 .ds-section1{
+  height: 504px; background: #000 url("/sites/default/files/British-isles-vs-continental-europe/The-British-Isles-vs-Continental-Europe-Banner.jpg") no-repeat center top; 
+} 
+
+.page-node-2219 .h2-lig{
+    font-family: "Neuzeit-lig";
+    font-size: 30px;
+    line-height: 40px;
+} 
+
+.page-node-2219 .h2-bold{
+    font-family: "Neuzeit-bold";
+    font-size: 22px;
+    line-height: 34px;
+    margin-bottom: 20px;
+    margin-top: -10px;
+} 
+
+
+
+.page-node-2219 h2{
+    color: #74ad30;
+    font-size: 24px;
+    font-family: "Neuzeit-black";
+}
+
+.page-node-2219 .ds-section2 .second-part {
+    margin-top: 30px;
+}
+
+
+.page-node-2219 .ds-section5 {
+    background: none repeat scroll 0 0 #666;
+     color: #fff;
+    font-family: 'Neuzeit';
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    line-height: 40px;
+    padding-top: 15px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
+.page-node-2219 .ds-section6 {
+    text-align: center;
+}
+
+.page-node-2219 .ds-section6 h2{
+   color: #000;
+}
+

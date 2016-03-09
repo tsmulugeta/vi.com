@@ -1,0 +1,32 @@
+
+@font-face {
+	font-family: 'Neuzeit-bold';
+	src: url('../fonts/neuzeitgro/bold/neuzeitgrobold.eot');
+	src: url('../fonts/neuzeitgro/bold/neuzeitgrobold?iefix') format('embedded-opentype'), url('../fonts/neuzeitgro/bold/neuzeitgrobold.woff') format('woff'), url('../fonts/neuzeitgro/bold/neuzeitgrobold.ttf') format('truetype'), url('../fonts/neuzeitgro/bold/neuzeitgrobold.svg#Neuzeit') format('svg')}
+
+@font-face {
+	font-family: "Neuzeit";
+	font-style: normal;
+	font-weight: normal;
+	src: url("../fonts/neuzeitgro/reg/neuzeitgroreg?#iefix") format("embedded-opentype"), url("../fonts/neuzeitgro/reg/neuzeitgroreg.woff") format("woff"), url("../fonts/neuzeitgro/reg/neuzeitgroreg.ttf") format("truetype"), url("../fonts/neuzeitgro/reg/neuzeitgroreg.svg#Neuzeit") format("svg")}
+
+@font-face {
+	font-family: "Neuzeit-lig";
+	font-style: normal;
+	font-weight: normal;
+	src: url("../fonts/neuzeitgro/lig/neuzeitgrolig?#iefix") format("embedded-opentype"), url("../fonts/neuzeitgro/lig/neuzeitgrolig.woff") format("woff"), url("../fonts/neuzeitgro/lig/neuzeitgrolig.ttf") format("truetype"), url("../fonts/neuzeitgro/lig/neuzeitgrolig.svg#Neuzeit") format("svg")}
+	
+	
+	body {font-family: 'arial'; }
+	p {line-height: 20px;}
+	
+	
+	h1, h2, h3, h4, h5 {font-family: 'Neuzeit-lig'; font-weight: normal; line-height: 40px;}
+	
+#wrapper {width: 980px; margin: 0 auto;}
+
+.grey-text {color: #747474;}
+
+.add-bottom {margin-bottom: 20px;}
+
+.header {height: auto; background: #333; height: 75px;}

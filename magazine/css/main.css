@@ -1,0 +1,138 @@
+@import url('reset.css');
+
+/* General classes */
+
+.top-spaced {
+	margin-top: 10px;
+}
+.bottom-spaced {
+	margin-bottom: 10px;
+}
+.clear {
+	clear: both;
+}
+
+.left-float {
+	float: left;
+}
+.right-float {
+	float: right;
+}
+
+.big {
+	font-size: 14px;
+}
+
+/* Tags */
+
+body {
+	margin: 20px;
+	background: url('../img/bg-pattern.png') repeat fixed;
+	color: #000;
+	font: 12px Helvetica, Arial, sans-serif;
+}
+body.small {
+	width: 600px;
+}
+
+a {
+	color: #CC0000;
+}
+a:hover {
+	text-decoration: underline;
+}
+
+h1 {
+	position: relative;
+	font-size: 40px;
+	letter-spacing: -2px;
+}
+h1.small {
+	color: #888;
+	font-weight: normal;
+}
+h1 strong {
+	color: #000;
+}
+
+h2 {
+	font-size: 20px;
+	font-weight: normal;
+}
+
+h3 {
+	color: #666;
+	font-size: 18px;
+	font-weight: normal;
+}
+
+p {
+	line-height: 18px;
+}
+p.title {
+	font-size: 40px;
+	font-weight: bold;
+	line-height: normal;
+	letter-spacing: -2px;
+}
+p.title.small {
+	color: #888;
+	font-weight: normal;
+}
+p.title strong {
+	color: #000;
+}
+p.large {
+	font-size: 34px;
+	font-weight: bold;
+	line-height: normal;
+	letter-spacing: -2px;
+}
+p.large.small {
+	color: #888;
+	font-weight: normal;
+}
+p.large strong {
+	color: #000;
+}
+p.subtitle {
+	color: #666;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 14px;
+	text-transform: uppercase;
+}
+
+small {
+	color: #888;
+	font-weight: normal;
+}
+
+strong {
+	font-weight: bold;
+}
+
+ul.items {
+	margin: 0 0 10px 0;
+}
+	ul.items li {
+		margin: 10px 0 0 0;
+	}
+
+ul.units {
+	padding: 0 0 0 30px;
+	list-style-type: circle;
+}
+	ul.units li {
+		margin: 5px 0 0 0;
+	}
+
+pre.code {
+	padding: 10px;
+	border: 1px solid #E1E1E1;
+	border-left-width: 10px;
+	background: #EEEEEE;
+	font-family: Consolas, monospace;
+	line-height: 16px;
+	white-space: pre-wrap;
+}

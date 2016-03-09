@@ -1,0 +1,84 @@
+<html>
+<head>
+    <title></title>
+    <script language="javascript" type="text/javascript">
+        // SCRIPTS FOR CONTENT BEHAVIOR, THIS IS OPTIONAL
+        var titleInitialClass;
+
+        function titleOverHandler(div, itemCode) {
+            titleInitialClass = div.className;
+            div.className = "visalusKitTitleContainerOver";
+        }
+
+        function titleOutHandler(div, itemCode) {
+            div.className = titleInitialClass;
+        }
+    </script>
+    <!-- THE SCRIPT INCLUDE FOR CONTENT, THIS IS REQUIRED -->
+    <script src="http://vicheckout.com/Scripts/ListJS.vs" type="text/javascript"></script>
+
+    <style type="text/css">
+        #viKitListContainer
+        {
+            background-color: #cf3b19;
+            width: 800px;
+            font-family: Arial;
+        }
+        
+        .viKitListItemContainer
+        {
+            background-color: #fddfa6;
+            float: left;
+            margin: 10px;
+            width: 160px;
+            text-align: center;
+            border-radius: 7px;
+            -moz-border-radius: 7px;
+            -o-border-radius: 7px;
+            -webkit-border-radius: 7px;
+        }
+        
+        #viKitListClear
+        {
+            height: 0px;
+            clear: both;
+        }
+        
+        .viKitListDescriptionContainer
+        {
+            text-align: left;
+            padding: 10px 15px 25px 15px;
+        }
+        
+        .viKitListTitleContainer
+        {
+            background-color: #95b632;
+            margin: 20px 0px 10px 0px;
+            padding: 15px 25px;
+        }
+        
+        .visalusKitTitleContainerOver
+        {
+            background-color: #0000FF;
+            margin: 20px 0px 10px 0px;
+            padding: 15px 25px;
+        }
+        
+        .viKitListDescription
+        {
+            font-size: 0.8em;
+        }
+        
+        .viKitListTitle
+        {
+            color: #FFFFFF;
+            font-weight: 700px;
+        }
+    
+    </style>
+</head>
+<body>
+    <!-- THE CONTENT CONTAINER DIV, THIS IS REQUIRED -->
+    <div id="viKitListContainer" />
+</body>
+</html>

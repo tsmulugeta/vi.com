@@ -1,0 +1,38 @@
+.pad-ca {
+display: block;
+background: url('../images/winback_can_eng_v2.jpg') no-repeat;
+width: 940px;
+height: 200px;
+margin: 0 auto;
+}
+
+.pad-us {
+display: block;
+background: url('../images/header_winback_generic_v2a.jpg') no-repeat;
+width: 940px;
+height: 200px;
+margin: 0 auto;
+}
+
+.pad-fr{
+display: block;
+background: url('../images/newwinback/header_winback_generic_v3a_fr.jpg') no-repeat;
+width: 940px;
+height: 200px;
+margin: 0 auto;
+}
+
+.pad-sp{
+display: block;
+background: url('../images/newwinback/header_winback_generic_v3a_sp.jpg') no-repeat;
+width: 940px;
+height: 200px;
+margin: 0 auto;
+}
+
+body, header {background: #fff;}
+
+.first {border-right-style: solid; border-width: 1px; color: #ccc;}
+
+
+	

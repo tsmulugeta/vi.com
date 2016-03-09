@@ -1,0 +1,64 @@
+/*-----------------------------------------------------------------------------
+
+KENBURNER RESPONSIVE BASIC STYLES OF HTML DOCUMENT
+
+Screen Stylesheet
+
+version:   	1.0
+date:      	07/27/11
+author:		themepunch
+email:     	support@themepunch.com
+website:   	http://www.themepunch.com
+-----------------------------------------------------------------------------*/
+
+
+.boxedcontainer		{	max-width: 1170px; margin:auto; padding:0px 30px;}
+
+/*********************************************
+	-	SETTINGS FOR BANNER CONTAINERS	-
+**********************************************/
+
+.tp-banner-container{
+	width:100%;
+	position:relative;
+	padding:0;
+
+}
+
+.tp-banner{
+	width:100%;
+	position:relative;
+}
+
+.tp-banner-fullscreen-container {
+		width:100%;
+		position:relative;
+		padding:0;
+}
+
+
+/*****************************************************************
+                     Responsive
+*******************************************************************/
+
+
+
+@media (min-width: 1400px) {
+	.learn-more a {font-size: 22px !important;}
+
+	.project10-slide-caption {font-size: 26px !important;}
+
+	.challengegroup-slide-caption span {font-size: 60px !important;}
+	.challengegroup-slide-caption p {font-size: 40px !important;}
+
+	.project10kids-slide-caption {font-size: 33px !important;}
+
+	.vishake-slide-caption span {font-size: 60px !important;}
+	.vishake-slide-caption p {font-size: 40px !important;}
+
+}
+
+
+
+
+

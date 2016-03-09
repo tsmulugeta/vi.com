@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ViExperts</title>
+<script>
+/*FROM ARTICLE: http://stackoverflow.com/questions/4656843/jquery-get-querystring-from-url*/
+/*SAMPLE URL: http://www.example.com/?me=myValue&name2=SomeOtherValue*/
+	function getUrlVars()
+	{
+	    var vars = [], hash;
+	    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+	    for(var i = 0; i < hashes.length; i++)
+	    {
+	        hash = hashes[i].split('=');
+	        vars.push(hash[0]);
+	        vars[hash[0]] = hash[1];
+	    }
+	    return vars;
+	}
+	/*languages: es*/
+	language = getUrlVars()["language"];
+	/*category: recipes, latino, results, champions, experts, celeb*/
+	category = getUrlVars()["category"];
+</script>
+</head>
+
+<body>
+<div id="tagboard-embed"></div>
+<script>
+if (language == 'es' && category == 'latino')
+{
+   var tagboardOptions = {tagboard:"vilatino/159380"}; /*SPANISH: LATINO*/
+}
+else if  (language == 'es' && category == 'recipes')
+{
+   var tagboardOptions = {tagboard:"virecetas/159381"}; /*SPANISH: RECIPES*/
+}
+else if  (language == 'es' && category == 'results')
+{
+   var tagboardOptions = {tagboard:"viresultados/159380"}; /*SPANISH: RESULTS*/
+}
+else if (category == 'results')
+{
+   var tagboardOptions = {tagboard:"viresults/46934"}; /*RESULTS*/
+}
+else if (category == 'experts')
+{
+   var tagboardOptions = {tagboard:"viexperts/143577"}; /*EXPERTS*/
+}
+else if (category == 'champions')
+{
+   var tagboardOptions = {tagboard:"vichampions/143579"}; /*CHAMPIONS*/
+}
+else if (category == 'celeb')
+{
+   var tagboardOptions = {tagboard:"viceleb/150308"}; /*CELEB*/
+}
+else 
+{
+   document.write("Tsegereda");
+}
+
+</script>
+<script src="https://tagboard.com/public/js/embed.js"></script>
+</body>
+</html>

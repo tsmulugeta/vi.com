@@ -1,0 +1,30 @@
+/* timer numbers */
+.timer_numbers {
+ font-family: 'Oswald', sans-serif;
+	font-size:70px;
+	font-weight:bold;
+	color:#74ad30;
+	line-height: 30px;
+	text-align: center;
+	padding-bottom:10px;
+	padding-top:30px;
+	background: rgba(255, 255, 255, 0.4);
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	margin-bottom:10px;
+	text-shadow: 1px 1px #e4e4e4;
+	-moz-box-shadow:    1px 1px 1px 2px #e4e4e4;
+	-webkit-box-shadow: 1px 1px 1px 2px #e4e4e4;
+	box-shadow:         1px 1px 1px 2px #e4e4e4;
+}
+	
+.timer_numbers span{
+	font-size: 20px;
+	color:#000000;
+	text-shadow: none;
+	line-height:10px;
+	font-weight: bold;
+	padding-bottom: 10px
+	
+}

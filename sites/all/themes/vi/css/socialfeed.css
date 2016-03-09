@@ -1,0 +1,70 @@
+
+/* ------------------------------------------------------------------------
+	Social Feed CSS
+------------------------------------------------------------------------- */
+
+
+#main-slider ul {margin: 0px;}
+
+#main-slider ul li.post {
+    width: 260px; height: 380px; float: left; text-align: left !important; overflow: hidden;
+    background-position: center center; background-size: cover;
+    border: 2px solid #000;
+    color: #fff; font-size: 16px; font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; font-weight: 300;
+} 
+    #main-slider ul li.post.facebook {
+    	background-image: url("http://vi.com/sites/default/files/social-slider/bg_facebook.jpg");
+    	background-color: #3c5a9a;
+    }
+    #main-slider ul li.post.twitter {
+    	background-image: url("http://vi.com/sites/default/files/social-slider/bg_twitter.jpg");
+    	background-color: #00acee;
+    }
+    	#main-slider .person-info-container {
+    		width: 100%; position: absolute; top: 20px; overflow: visible;
+    	}
+        #main-slider .social-icon {
+          float: right; padding-right: 15px;
+        }
+        #main-slider .person-profile {
+          font-family: "Neuzeit"; -webkit-font-smoothing: antialiased; font-size: 15px; line-height: 15px; text-transform: uppercase; text-shadow: 1px 1px 1px #3D3D3D;
+          float: left; padding-left: 15px;
+        }
+          #main-slider .person-profile b {
+            display: block; font-size: 10px; line-height: 10px; text-transform: none !important;
+          }
+          #main-slider .person-profile img.profile-thumb {
+            -webkit-border-radius: 15px;
+            -moz-border-radius: 15px;
+            border-radius: 15px; 
+            box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+            -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+            -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8); 
+            width: 30px; height: 30px; float: left;
+          }
+          #main-slider .person-profile .username {float: left; max-width: 150px; padding-left: 20px;}
+        #main-slider .post-text {
+          clear: both; font-size: 18px; line-height: 24px; padding: 0px 15px; 
+          /*text-shadow: 1px 1px 1px #3D3D3D;*/ text-shadow: 1px 1px 10px #000;
+        }
+        #main-slider .post-text.fixed {
+        	position: absolute; top: 250px; max-height: 100px; overflow: hidden;
+        }
+        #main-slider .post-text.centered {
+        	height: 100%; display: table-cell; vertical-align: middle; text-shadow: 1px 1px 1px #3D3D3D;
+        }
+        #main-slider ul li a.play-btn {
+        	display: table-cell; width: 100%; height: 100%;
+			background: url("http://vi.com/sites/default/files/btn_play_arrow.png") no-repeat center center;
+        }
+
+
+    #main-slider .transparent-bg {
+      width: 100%; height: 100%; position: relative; display: table; z-index: 100;
+      background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.75) 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(30%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.75)));
+      background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0.75) 100%);
+      background: -o-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0.75) 100%);
+      background: -ms-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0.75) 100%);
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0.75) 100%);
+    }    

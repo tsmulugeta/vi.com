@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var msgCounTimer = setInterval(getData, 2000);
+
+            function getData() {
+                var strURL = 'http://208.81.179.200/SMS/GetCount.aspx?';
+                $.getJSON(strURL + 'callback=?', jsonp_callback);
+            }
+
+            function jsonp_callback(data) {
+                //$('#divResolutionCounter').html(data.Count);
+                var count = new String("000000");
+                count = data.Count;
+                if (count.length < 6) {
+                    count = "0" + count;
+                }
+                $('#div0').html(count[0]);
+                $('#div1').html(count[1]);
+                $('#div2').html(count[2]);
+                $('#div3').html(count[3]);
+                $('#div4').html(count[4]);
+                $('#div5').html(count[5]);
+            }
+        });
+    </script>
+    
+    <style>
+    @font-face {
+    font-family: "Neuzeit";
+    font-style: normal;
+    font-weight: normal;
+    src: url("fonts/neuzeitgro/neuzeitgroreg?#iefix") format("embedded-opentype"), url("fonts/neuzeitgro/NeuzeitGro-Reg.woff") format("woff"), url("fonts/neuzeitgro/neuzeitgroreg.ttf") format("truetype"), url("fonts/neuzeitgro/neuzeitgroreg.svg#Neuzeit") format("svg");}
+    
+    div {font-family: 'Neuzeit', Arial, sans-serif;
+}
+    </style>
+</head>
+<body style="background: #000;">
+    <form id="form1" runat="server">
+    <div id="divResolutionCounter">
+    </div>
+    <div id="div0" style="float: left; margin-right: 5px; padding-left: 15px; padding-top: 5px;
+        background-color: white; height: 40px; width: 35px; font-size: 35px; font-weight: bold;">
+        0
+    </div>
+    <div id="div1" style="float: left; margin-right: 5px; padding-left: 15px; padding-top: 5px;
+        background-color: White; height: 40px; width: 35px; font-size: 35px;  font-weight: bold;">
+        0
+    </div>
+    <div id="div2" style="float: left; margin-right: 5px; padding-left: 15px; padding-top: 5px;
+        background-color: White; height: 40px; width: 35px; font-size: 35px;  font-weight: bold;">
+        0
+    </div>
+    <div id="div3" style="float: left; margin-right: 5px; padding-left: 15px; padding-top: 5px;
+        background-color: White; height: 40px; width: 35px; font-size: 35px;  font-weight: bold;">
+        0
+    </div>
+    <div id="div4" style="float: left; margin-right: 5px; padding-left: 15px; padding-top: 5px;
+        background-color: White; height: 40px; width: 35px; font-size: 35px;  font-weight: bold;">
+        0
+    </div>
+    <div id="div5" style="float: left; padding-left: 15px; padding-top: 5px;
+        background-color: #fff; height: 40px; width: 35px; font-size: 35px;  font-weight: bold;">
+        0
+    </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,252 @@
+/* This file will hold styles for all layouts using the alpha grid (i.e. not the mobile layout). */
+
+body{font-size: 14px}
+
+h1{font-size:20px;line-height:30px}
+h1 strong{font-size:35px;font-weight:normal}
+
+h2{font-size:20px;line-height:30px}
+h2 strong{font-size:30px;font-weight:normal}
+
+h3{font-size:15px;line-height:25px}
+h3 strong{font-size:20px;font-weight:normal}
+
+h4{font-size:12px;line-height:20px}
+h4 strong{font-size:15px;font-weight:normal}
+
+.no-show{display:block}
+.no-show img{display:block}
+
+.absolute-bottom{position:absolute;bottom:0;right:0}
+
+/*Quicktabs*/
+
+ul.quicktabs-tabs li,
+body.context-community ul.quicktabs-tabs li{
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+  padding:7px 10px 10px;
+  margin-left:2px;
+  font-size:14px}
+
+body.context-community ul.quicktabs-tabs li.first{margin-left:20px}
+
+.button1{
+    background: url("/sites/default/files/button1.png") no-repeat scroll 100% 50% transparent;
+    display: block;
+    float: right;
+    font-size: 16px;
+    font-weight: bold;
+    min-height: 25px;
+    padding-right: 35px;}
+
+/* pattern Box*/
+.pattern-box{
+background: transparent url('/sites/default/files/horizental-gradient-box.png') no-repeat scroll 0 0;
+min-height:140px;
+padding:10px;
+font-size:12px;
+color:#000
+}
+
+/*Team Members Page*/
+.team-member{
+background: transparent url('/sites/default/files/horizental-gradient-box.png') no-repeat scroll 0 0;
+min-height:215px
+}
+
+
+a.green-button{font-size:14px/*;text-shadow: 1px 1px 1px #425e20;*/}
+a.grey-button{font-size:14px/*;text-shadow: 1px 1px 1px #425e20;*/}
+a.orange-button{font-size:14px/*;text-shadow: 1px 1px 1px #425e20;*/}
+a.blue-button{font-size:14px/*;text-shadow: 1px 1px 1px #425e20;*/}
+a.red-button{font-size:14px/*;text-shadow: 1px 1pxr 1px #425e20;*/}
+
+/* #Content Section
+================================================== */
+/* Homepage */
+
+.zone-branding-wrapper{
+  background: #dbdbdb url('/sites/default/files/visalus_homepage_fullbleed_bg.png') 45% 0 no-repeat;
+  
+	background: url('/sites/default/files/visalus_homepage_fullbleed_bg.png') 45% 0 no-repeat, -moz-linear-gradient(top, #dbdbdb 8%, #fff 75%);
+	background: url('/sites/default/files/visalus_homepage_fullbleed_bg.png') 45% 0 no-repeat, -webkit-gradient(linear, left top, left bottom, color-stop(8%,#dbdbdb), color-stop(75%,#fff));
+	/* removed because it was interfering with the image rendering in ie8 and 9 */
+	/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#949494', endColorstr='#e6e6e6',GradientType=0 );*/
+	z-index:-1000;}
+
+body.front .zone-branding-wrapper{margin-top:-56px; z-index:-999;	min-height:850px}
+
+body.front .view-promotions div{background: transparent url('/sites/default/files/shadow_pods.png') 50% 100% no-repeat}
+
+
+.zone-precontent-wrapper{
+  background: transparent url('/sites/default/files/bg-dotted.png') repeat-x scroll 0 bottom;
+  margin-bottom:0px;
+  padding-bottom:10px}
+
+body.context-body-by-vi .section-content{
+  /*background-image: url('/vi/sites/default/files/styles/content-bg-green.jpg'); /* inserted line for background image */
+  }/*red*/
+
+body.context-body-by-vi-products .section-content{
+  /*background-image: url('/vi/sites/default/files/styles/content-bg-blue.jpg'); /* inserted line for background image */
+  }/*blue*/
+
+body.context-about-visalus .section-content,
+body.context-promote-body-by-vi .section-content{
+  /*background-image: url('/vi/sites/default/files/styles/content-bg-green.jpg'); /* inserted line for background image */
+  }/*green*/
+  
+body.context-community .section-content{
+  /*background-image: url('/vi/sites/default/files/styles/content-bg-orange.jpg'); /* inserted line for background image */
+  }/*orange*/
+  
+body.context-body-by-vi-challenge-kits .section-content{
+  /*background-image: url('/vi/sites/default/files/styles/content-bg-grey.jpg'); /* inserted line for background image */
+  }/*grey*/
+
+.intro-block{min-height:180px;color:#fff}
+
+.challenge-kits{
+  float:left;
+  width:188px;
+  text-align:center;
+ }
+ 
+#edit-tid-35 a,
+#edit-tid-36 a,
+#edit-tid-37 a,
+#edit-tid-38 a{
+  color: #FFFFFF;
+  display: block;
+  font-weight: bold;
+  height: 0;
+  padding-top: 84px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 220px}
+
+/* #Links
+================================================== */
+
+/* #Helper Class
+================================================== */
+
+/* #Gradients
+================================================== */
+
+/* #Responsive Video Styling
+================================================== */
+
+/* #Box Styling
+================================================== */
+
+/* #Header Section
+================================================== */
+
+/* Social Links */
+
+/* Logo */
+.block-block-1{padding:0}
+
+body.logged-in .block-block-1 .block-inner .content img{
+  height: 90px;
+  position: absolute;
+  top: -20px;
+  width:140px;
+  background: #000}
+
+.block-block-1 .block-inner .content img{
+  height: 90px;
+  position: absolute;
+  top: 0;
+  width:140px}
+  
+.block-block-2 img{position:absolute;top:-1px;z-index: 100}
+
+/* #Login
+================================================== */
+/*.block-block-47 ul li a{display:block;background: #b2b3b6;color:#fff;font-size: 11px;padding:10px;font-weight:normal}
+.block-block-47 ul li a:hover{background: #6eb43f}
+.block-block-47 ul li{float:left;list-style:none;padding-right:5px}
+.block-block-47 ul li.first{padding-right:1px}
+.block-block-47 ul li.last{padding-right:0}
+.block-block-47 ul{float:left;padding-top:0;margin-top:0;margin-bottom:0}
+.block-block-47{display:block;float:right}*/
+
+
+/* #Menu Section
+================================================== */
+
+/* Menu region*/
+.region-menu{min-height:53px}
+
+/* Region Login*/
+.region-login{display:block;z-index:498}
+
+/* Menus */
+/*.block-menu-block-3 ul.menu li a{
+  padding:15px 20px 13px;
+  border-right:1px solid #d2d2d3;
+  font-size:14px;
+  font-weight:normal}*/
+  
+/*.block-menu-block-3 ul.menu li.first a{border-left:1px solid #d2d2d3}*/
+
+.zone-menu{padding:0 0 2px; background: transparent url('/sites/default/files/divider.png') no-repeat scroll 0 bottom;z-index:1000}
+.block-menu-block-4 ul.menu li a{color:#d5d6d7;font-size:12px}
+.block-menu-block-4 ul.menu li{margin: 0 0 0 0.5em;}
+/*main Homepage Image*/
+  
+/* #Content Section
+================================================== */
+/*.breadcrumb{display:block}*/
+.breadcrumb a{text-decoration:none;color:#818285;font-size:10px}
+.breadcrumb a.active{font-weight:bold}
+
+/* #Footer Section
+================================================== */
+
+/* timer numbers */
+.countdown-box{
+	margin:0 0 0 15px;
+}
+
+.numbers{
+  font-family: "Neuzeit";
+	font-size:61px;
+	color:#74ad30;
+	line-height: 20px;
+	text-align: center;
+	padding:35px 10px 10px;
+	float:left}
+	
+.days{
+	font-size: 12px;
+	color:#ffffff;
+	text-shadow: none;
+	line-height:20px;
+	text-transform:uppercase}
+	
+/* Vi mmunity Page offer*/
+#vimmunity_offer_bg {
+	background-image: url("/sites/default/files/visalus_vimmunity_bg.jpg");
+	background-repeat: no-repeat;
+	width: 942px;
+	height: 479px;
+	}
+	
+	#vimmunity_offer_sp_bg {
+	background-image: url("/sites/default/files/visalus_vimmunity_sp_bg.jpg");
+	background-repeat: no-repeat;
+	width: 942px;
+	height: 479px;
+	}
+
+.page-node-1258 h1.vimmunity, .page-node-1259 h1.vimmunity {font-size: 28px; line-height: 45px;}
+.page-node-1258 h2.vimmunity, .page-node-1259 h2.vimmunity {font-size: 43px; line-height: 20px;}
+.page-node-1258 h1.vimmunity strong, .page-node-1259 h1.vimmunity strong{color: #fff; font-size: 50px; font-weight: bold;}
+.page-node-1258 h2.vimmunity strong, .page-node-1259 h2.vimmunity strong{color: #fff; font-size: 32px; font-weight: bold;}
+.page-node-1258 .btn-large, .page-node-1259 .btn-large {padding: 15px 35px; font-size: 25px;}

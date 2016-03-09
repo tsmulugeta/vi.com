@@ -1,0 +1,57 @@
+
+  
+  
+   <script> 
+
+
+
+   
+
+
+ if (1<20) {
+                $.ajax({
+            async: false,
+            url: "http://api.visalus.com/ITReporting/SalesAnalytics/GetDataBySP/?SPName=usp_Promo_Magazine_August_Web_RisingStar_JSONP&?",
+            type: 'GET',
+            dataType: 'jsonp',
+            success: function (data) {
+                var result = JSON.stringify(data);
+                //alert(result);
+                var obj = jQuery.parseJSON(result);
+                
+        for (var i in obj) {
+            output= "<p>Updated: "+ obj[i].LastUpdate + "</p>";
+        }
+
+        
+                
+                document.write("yo");
+            },
+            error: function (e) {
+                alert('fail');
+            }
+        });
+ 
+ 
+                
+                }
+
+
+               
+
+
+
+   
+    
+  
+  
+ 
+
+               
+  
+  
+ 
+    
+  
+  </script>
+  

@@ -1,0 +1,229 @@
+@import url('main.css');
+
+#wrapper {width: 940px;}
+
+/* Slideshow */
+
+#slideshow-menu-wrapper {
+	position: relative;
+}
+#slideshow-menu-wrapper .cursor {
+	position: absolute;
+	width: 81px;
+	height: 108px;
+	border: 3px solid #74ad30;
+}
+
+ul#slideshow-menu {
+	width: 85px;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+ul#slideshow-menu li {
+	margin: 0;
+	
+}
+	ul#slideshow-menu li a {
+		display: block;
+		margin: 3px;
+		padding: 2px;
+		height: 100px;
+		
+		
+		
+	}
+		ul#slideshow-menu li a .title {
+			display: block;
+			margin: 1px 0 7px 0;
+			color: #000;
+			font-size: 14px;
+			font-weight: bold;
+			line-height: 24px;
+			letter-spacing: -1px;
+			text-decoration: none;
+			
+			
+		}
+		
+		ul#slideshow-menu li a img {
+			border: 1px solid #ccc
+		}
+		
+		ul#slideshow-menu li a .description {
+			display: block;
+			color: #444;
+			font-size: 11px;
+			line-height: 11px;
+			text-transform: uppercase;
+		}
+	ul#slideshow-menu li a:hover {
+		text-decoration: none;
+		
+	}
+		ul#slideshow-menu li a:hover .title {
+			
+		}
+
+#slideshow {
+	width: 838px;
+	height: 1088px;
+	overflow: hidden;
+}
+	#slideshow .handle {
+		width: 26816px;
+		height: 267px;
+	}
+		#slideshow .handle .slide {
+			float: left;
+			width: 838px;
+			height: 1088px;
+		}
+		#slideshow .handle .img1 {
+			background: url('../images/slide1.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img2 {
+			background: url('../images/slide2.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img3 {
+			background: url('../images/slide3.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img4 {
+			background: url('../images/slide4.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img5 {
+			background: url('../images/slide5.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img6 {
+			background: url('../images/slide6.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img7 {
+			background: url('../images/slide7.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img8 {
+			background: url('../images/slide8.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img9 {
+			background: url('../images/slide9.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img10 {
+			background: url('../images/slide10.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img11 {
+			background: url('../images/slide11.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img12 {
+			background: url('../images/slide12.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img13 {
+			background: url('../images/slide13.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img14 {
+			background: url('../images/slide14.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img15 {
+			background: url('../images/slide15.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img16 {
+			background: url('../images/slide16.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img17 {
+			background: url('../images/slide17.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img18 {
+			background: url('../images/slide18.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img19 {
+			background: url('../images/slide19.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img20 {
+			background: url('../images/slide20.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img21 {
+			background: url('../images/slide21.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img22 {
+			background: url('../images/slide22.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img23 {
+			background: url('../images/slide23.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img24 {
+			background: url('../images/slide24.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img25 {
+			background: url('../images/slide25.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img26 {
+			background: url('../images/slide26.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img27 {
+			background: url('../images/slide27.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img28 {
+			background: url('../images/slide28.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img29 {
+			background: url('../images/slide29.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img30 {
+			background: url('../images/slide30.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img31 {
+			background: url('../images/slide31.jpg') no-repeat 0 0;
+		}
+		#slideshow .handle .img32 {
+			background: url('../images/slide32.jpg') no-repeat 0 0;
+		}
+
+/* Canvas mask */
+
+#canvas-mask {
+	width: 600px;
+	height: 300px;
+	overflow: hidden;
+}
+	#canvas-mask .handle {
+		width: 1200px;
+		height: 600px;
+		background: url('../img/dragdealer/canvas.jpg') no-repeat 0 0;
+	}
+		#canvas-mask .handle .slide {
+			position: relative;
+			float: left;
+			width: 600px;
+			height: 300px;
+		}
+			#canvas-mask .handle .slide .bar {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				padding: 12px;
+				background: url('../img/dragdealer/overlay.png') repeat 0 0;
+				color: #FFF;
+			}
+				#canvas-mask .handle .slide .bar .title {
+					display: block;
+					margin: 0 0 6px 0;
+					font-size: 26px;
+					font-weight: bold;
+					line-height: 26px;
+					letter-spacing: -1px;
+				}
+				#canvas-mask .handle .slide .bar .description {
+					display: block;
+					color: #EEE;
+					font-size: 12px;
+					line-height: 12px;
+					text-transform: uppercase;
+				}
+				
+				.background {
+					
+					width: 101px;
+					height: 1088px;
+					overflow: auto;
+					background-color: #666;
+					float: right;
+				}

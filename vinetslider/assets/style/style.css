@@ -1,0 +1,47 @@
+@font-face {
+    font-family: "Neuzeit";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/neuzeitgro/neuzeitgroreg?#iefix") format("embedded-opentype"), url("../fonts/neuzeitgro/NeuzeitGro-Reg.woff") format("woff"), url("../fonts/neuzeitgro/neuzeitgroreg.ttf") format("truetype"), url("../fonts/neuzeitgro/neuzeitgroreg.svg#Neuzeit") format("svg");
+}
+
+@font-face {
+    font-family: "Neuzeit-Bold";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/neuzeitgro/neuzeitgrobold?#iefix") format("embedded-opentype"), url("../fonts/neuzeitgro/neuzeitgrobold.woff") format("woff"), url("../fonts/neuzeitgro/neuzeitgrobold.ttf") format("truetype"), url("../fonts/neuzeitgro/neuzeitgrobold.svg#Neuzeit") format("svg");
+}
+
+
+#main {width: 957px; height: 220px;}
+ .bx-wrapper .bx-viewport {
+	-moz-box-shadow: 0 0 0 #ccc;
+	-webkit-box-shadow: 0 0 0 #ccc;
+	box-shadow: 0 0 0 #ccc;
+	border: solid #000 0px;
+	left: -5px;
+	background: #000;
+}
+
+ .bx-wrapper .bx-pager.bx-default-pager a:hover,
+ .bx-wrapper .bx-pager.bx-default-pager a.active {
+	background: #74ad30;
+}
+
+ .bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto {bottom: 10px;}
+ .bx-wrapper {margin: 0 auto 0;}
+ .bx-viewport {height: 220px !important;}
+
+
+/*** slide styles  ****/
+body {margin: 0; padding: 0;}
+h1 strong{color: #fff; font-family: "Neuzeit-Bold"; letter-spacing: 1px; font-size: 50px; text-transform: uppercase; line-height: 20px;}
+h3 strong{color: #fff; font-family: "Neuzeit-Bold"; letter-spacing: 1px; font-size: 35px; text-transform: uppercase;}
+
+.life {color: #74ad30;}
+.health {color: #00CAB4;}
+.prosperity {color: #ECF13D;}
+.text-center {text-align: center;}
+p {color: #fff; font-family: "Helvetica", Arial, sans-serif;}
+
+ul.bxslider {margin-top: 0;}

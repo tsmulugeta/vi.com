@@ -1,0 +1,28 @@
+/* This file will hold styles that are loaded using the same media query as the wide grid. */
+
+
+/* #Header
+================================================== */
+
+/*
+#zone-header {
+	width: 1200px;
+}
+*/
+
+/* #Product Page
+================================================== */
+
+.masonry-item, .packery-item {width: 33.33%;}
+
+
+/* #ViBites
+================================================== */
+
+#main #vibites-header .product-bg,
+#fruitfrenzy #vibites-header .product-bg,
+#chocolatemonkey #vibites-header .product-bg,
+#gloriousgreens #vibites-header .product-bg,
+#fiestanut #vibites-header .product-bg {
+	background-size: 100% auto;
+}

@@ -1,0 +1,568 @@
+#
+# Apache/PHP/Drupal settings:
+#
+
+# Protect files and directories from prying eyes.
+<FilesMatch "\.(engine|inc|info|install|make|module|profile|test|po|sh|.*sql|theme|tpl(\.php)?|xtmpl)(|~|\.sw[op]|\.bak|\.orig|\.save)?$|^(\..*|Entries.*|Repository|Root|Tag|Template)$|^#.*#$|\.php(~|\.sw[op]|\.bak|\.orig\.save)$">
+  Order allow,deny
+</FilesMatch>
+
+# Don't show directory listings for URLs which map to a directory.
+Options -Indexes
+
+# Follow symbolic links in this directory.
+Options +FollowSymLinks
+
+# Make Drupal handle any 404 errors.
+ErrorDocument 404 /index.php
+
+# Set the default handler.
+DirectoryIndex index.php index.html index.htm index_junk.html
+
+# Override PHP settings that cannot be changed at runtime. See
+# sites/default/default.settings.php and drupal_environment_initialize() in
+# includes/bootstrap.inc for settings that can be changed at runtime.
+
+# PHP 5, Apache 1 and 2.
+<IfModule mod_php5.c>
+  php_flag magic_quotes_gpc                 off
+  php_flag magic_quotes_sybase              off
+  php_flag register_globals                 off
+  php_flag session.auto_start               off
+  php_value mbstring.http_input             pass
+  php_value mbstring.http_output            pass
+  php_flag mbstring.encoding_translation    off
+</IfModule>
+
+# Requires mod_expires to be enabled.
+<IfModule mod_expires.c>
+  # Enable expirations.
+  ExpiresActive On
+
+  # Cache all files for 2 weeks after access (A).
+  ExpiresDefault A1209600
+
+  <FilesMatch \.php$>
+    # Do not allow PHP scripts to be cached unless they explicitly send cache
+    # headers themselves. Otherwise all scripts would have to overwrite the
+    # headers set by mod_expires if they want another caching behavior. This may
+    # fail if an error occurs early in the bootstrap process, and it may cause
+    # problems if a non-Drupal PHP file is installed in a subdirectory.
+    ExpiresActive Off
+  </FilesMatch>
+</IfModule>
+
+# Various rewrite rules.
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+
+  # Set "protossl" to "s" if we were accessed via https://.  This is used later
+  # if you enable "www." stripping or enforcement, in order to ensure that
+  # you don't bounce between http and https.
+  RewriteRule ^ - [E=protossl]
+  RewriteCond %{HTTPS} on
+  RewriteRule ^ - [E=protossl:s]
+
+  # Block access to "hidden" directories whose names begin with a period. This
+  # includes directories used by version control systems such as Subversion or
+  # Git to store control files. Files whose names begin with a period, as well
+  # as the control files used by CVS, are protected by the FilesMatch directive
+  # above.
+  #
+  # NOTE: This only works when mod_rewrite is loaded. Without mod_rewrite, it is
+  # not possible to block access to entire directories from .htaccess, because
+  # <DirectoryMatch> is not allowed here.
+  #
+  # If you do not have mod_rewrite installed, you should remove these
+  # directories from your webroot or otherwise protect them from being
+  # downloaded.
+  RewriteRule "(^|/)\." - [F]
+
+  # If your site can be accessed both with and without the 'www.' prefix, you
+  # can use one of the following settings to redirect users to your preferred
+  # URL, either WITH or WITHOUT the 'www.' prefix. Choose ONLY one option:
+  #
+  # To redirect all users to access the site WITH the 'www.' prefix,
+  # (http://example.com/... will be redirected to http://www.example.com/...)
+  # uncomment the following:
+  # RewriteCond %{HTTP_HOST} .
+  # RewriteCond %{HTTP_HOST} !^www\. [NC]
+  # RewriteRule ^ http%{ENV:protossl}://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  #
+  # To redirect all users to access the site WITHOUT the 'www.' prefix,
+  # (http://www.example.com/... will be redirected to http://example.com/...)
+  # uncomment the following:
+  # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  # RewriteRule ^ http%{ENV:protossl}://%1%{REQUEST_URI} [L,R=301]
+
+  # Modify the RewriteBase if you are using Drupal in a subdirectory or in a
+  # VirtualDocumentRoot and the rewrite rules are not working properly.
+  # For example if your site is at http://example.com/drupal uncomment and
+  # modify the following line:
+  # RewriteBase /drupal
+  #
+  # If your site is running in a VirtualDocumentRoot at http://example.com/,
+  # uncomment the following line:
+  # RewriteBase /
+
+  # Pass all requests not referring directly to files in the filesystem to
+  # index.php. Clean URLs are handled in drupal_environment_initialize().
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !=/favicon.ico
+  RewriteCond %{REQUEST_URI} !=/fr
+  RewriteCond %{REQUEST_URI} !=/se
+  RewriteCond %{REQUEST_URI} !=/sp
+  RewriteCond %{REQUEST_URI} !=/fi
+  RewriteCond %{REQUEST_URI} !=/it
+  RewriteCond %{REQUEST_URI} !=/pl
+  RewriteCond %{REQUEST_URI} !=/eu-es
+  RewriteRule ^ index.php [L]
+
+  # Rules to correctly serve gzip compressed CSS and JS files.
+  # Requires both mod_rewrite and mod_headers to be enabled.
+  <IfModule mod_headers.c>
+    # Serve gzip compressed CSS files if they exist and the client accepts gzip.
+    RewriteCond %{HTTP:Accept-encoding} gzip
+    RewriteCond %{REQUEST_FILENAME}\.gz -s
+    RewriteRule ^(.*)\.css $1\.css\.gz [QSA]
+
+    # Serve gzip compressed JS files if they exist and the client accepts gzip.
+    RewriteCond %{HTTP:Accept-encoding} gzip
+    RewriteCond %{REQUEST_FILENAME}\.gz -s
+    RewriteRule ^(.*)\.js $1\.js\.gz [QSA]
+
+    # Serve correct content types, and prevent mod_deflate double gzip.
+    RewriteRule \.css\.gz$ - [T=text/css,E=no-gzip:1]
+    RewriteRule \.js\.gz$ - [T=text/javascript,E=no-gzip:1]
+
+    <FilesMatch "(\.js\.gz|\.css\.gz)$">
+      # Serve correct encoding type.
+      Header set Content-Encoding gzip
+      # Force proxies to cache gzipped & non-gzipped css/js files separately.
+      Header append Vary Accept-Encoding
+    </FilesMatch>
+  </IfModule>
+</IfModule>
+
+#Redirect permanent ^(/se)$ http://visalus.com/pi/sweden.php
+
+# redirects crunch.vi.com to http://visalus.com/products/vi-crunch
+RewriteCond %{HTTP_HOST} ^(www\.)?crunch\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://visalus.com/products/vi-crunch [L,R=301]
+
+# redirects project10k.vi.com to http://vi.com/project-10-kids
+RewriteCond %{HTTP_HOST} ^(www\.)?project10k\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://vi.com/project-10-kids/ [L,R=301]
+
+# redirects bogof.vi.com to http://vi.co.uk/bogof
+RewriteCond %{HTTP_HOST} ^(www\.)?summerchallenge\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://visalushub.com/summer-challenge-2015/ [L,R=301]
+
+# redirects bogof.vi.com to http://vi.co.uk/bogof
+RewriteCond %{HTTP_HOST} ^(www\.)?bogof\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://vi.co.uk/bogof [L,R=301]
+
+# redirects challenge.vi.com to http://visalus.com/the-challenge
+RewriteCond %{HTTP_HOST} ^(www\.)?challenge\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://visalus.com/the-challenge [L,R=301]
+
+# redirects vilife.vi.com to http://visalus.com/vi-life
+RewriteCond %{HTTP_HOST} ^(www\.)?vilife\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://visalus.com/vi-life [L,R=301]
+
+
+# redirects 100lbclub.vi.com to http://visalus.com/100-lb-club
+RewriteCond %{HTTP_HOST} ^(www\.)?100lbclub\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://visalus.com/100-lb-club [L,R=301]
+
+# redirects bimmerclub.vi.com to http://vi.com/rewards/bimmer-club
+RewriteCond %{HTTP_HOST} ^(www\.)?bimmerclub\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://visalus.com/rewards/bimmer-club [L,R=301]
+
+# redirects hub.vi.com to http://visalushub.com
+RewriteCond %{HTTP_HOST} ^(www\.)?hub\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://visalushub.com [L,R=301]
+
+# redirects vet.vi.com to http://viurl.cc/vet/
+RewriteCond %{HTTP_HOST} ^(www\.)?vet\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://viurl.cc/vet/ [L,R=301]
+
+# redirects mastermind.vi.com to http://visalus.com/mastermind_2014
+RewriteCond %{HTTP_HOST} ^(www\.)?mastermind\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://visalus.com/mastermind_2014 [L,R=301]
+
+# redirects blog.visalus.com to visalusblog.com 
+RewriteCond %{HTTP_HOST} ^blog\.visalus\.com [NC]
+RewriteRule (.*) http://visalusblog.com/$1 [L,R=301]
+
+# redirects 3ff.vi.com to http://visalus.com/body-by-vi/3-free
+RewriteCond %{HTTP_HOST} ^(www\.)?3ff\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://visalus.com/body-by-vi/3-free [L,R=301]
+
+# redirects leadership.vi.com to http://visalus.com/leadership-launch
+RewriteCond %{HTTP_HOST} ^(www\.)?leadership\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://vi.com/leadership-launch [L,R=301]
+
+# redirects NEONparty.vi.com to http://vi.com/neon-party
+RewriteCond %{HTTP_HOST} ^(www\.)?NEONparty\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://vi.com/neon-party [L,R=301]
+
+# redirects leadership-launch.vi.com to http://visalus.com/leadership-launch
+RewriteCond %{HTTP_HOST} ^(www\.)?leadership-launch\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://vi.com/leadership-launch [L,R=301]
+
+# redirects paradise.vi.com to http://www.visalus.com/body-by-vi/ambassador-leadership-challenge-2014
+RewriteCond %{HTTP_HOST} ^(www\.)?paradise\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://visalus.com/body-by-vi/ambassador-leadership-challenge-2014 [L,R=301]
+
+# redirects vitality.vi.com to http://vi.com/vitality-2014
+#RewriteCond %{HTTP_HOST} ^(www\.)?vitality\.(visalus|vi)\.com [NC]
+#RewriteRule (.*) http://visalus.com/vitality-2014 [L,R=301]
+
+# redirects offers.vi.com to http://vi.com/bogo
+RewriteCond %{HTTP_HOST} ^(www\.)?offers\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://viurl.cc/rgo/3085/1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 [L,R=301]
+
+# redirects offer.vi.com to http://offers.vi.com
+RewriteCond %{HTTP_HOST} ^(www\.)?offer\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://offers.vi.com [L,R=301]
+
+# redirects ofertas.vi.com to http://vi.com/es/bogo
+RewriteCond %{HTTP_HOST} ^(www\.)?ofertas\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://vi.com/es/bogo [L,R=301]
+
+# redirects offres.vi.com to http://vi.com/fr/bogo
+RewriteCond %{HTTP_HOST} ^(www\.)?offres\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://vi.com/fr/bogo [L,R=301]
+
+# redirects wlcp.vi.com to http://worldslargestchallengeparty.com/events
+RewriteCond %{HTTP_HOST} ^(www\.)?wlcp\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://worldslargestchallengeparty.com/events [L,R=301]
+
+# redirects faceoff.vi.com to http://worldslargestchallengeparty.com
+RewriteCond %{HTTP_HOST} ^(www\.)?faceoff\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://worldslargestchallengeparty.com [L,R=301]
+
+# redirects lid2014.vi.com to http://visalus.com/i-was-room-replay-video
+RewriteCond %{HTTP_HOST} ^(www\.)?lid2014\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://vi.com/i-was-room-replay-video [L,R=301]
+
+# redirects duediligence.vi.com to http://visalus.com/body-by-vi-overview-presentation
+RewriteCond %{HTTP_HOST} ^(www\.)?duediligence\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://visalus.com/body-by-vi-overview-presentation [L,R=301]
+
+# redirects overview.vi.com to http://visalus.com/body-by-vi-overview-presentation
+RewriteCond %{HTTP_HOST} ^(www\.)?overview\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://visalus.com/body-by-vi-overview-presentation [L,R=301]
+
+# redirects rockstarrally.vi.com to http://worldslargestchallengeparty.com/
+RewriteCond %{HTTP_HOST} ^(www\.)?rockstarrally\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://worldslargestchallengeparty.com/ [L,R=301]
+
+# redirects party.vi.com to http://visalus.com/how-host-visalus-challenge-party
+RewriteCond %{HTTP_HOST} ^(www\.)?party\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://visalus.com/how-host-visalus-challenge-party [L,R=301]
+
+# redirects viliferockstars.vi.com to http://vi.com/body-by-vi/superstar-rock-star-challengers
+RewriteCond %{HTTP_HOST} ^(www\.)?viliferockstars\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://vi.com/body-by-vi/superstar-rock-star-challengers [L,R=301]
+
+# redirects canadap10launch.vi.com to http://vieventsandtraining.com/event/toronto-rst/
+RewriteCond %{HTTP_HOST} ^(www\.)?canadap10launch\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://vieventsandtraining.com/event/toronto-rst/ [L,R=301]
+
+# redirects resultate.vi.com to http://results.vi.com
+RewriteCond %{HTTP_HOST} ^(www\.)?resultate\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://results.vi.com [L,R=301]
+
+# redirects memoryjogger.vi.com to http://visalus.com/sites/default/files/docs/corporate/D1048US_MemoryJogger.pdf
+RewriteCond %{HTTP_HOST} ^(www\.)?memoryjogger\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://visalus.com/sites/default/files/docs/corporate/D1048US_MemoryJogger.pdf [L,R=301]
+
+# redirects neon.vi.com to http://visalushub.com/the-one-thing-youll-get-only-at-nst-2015/
+RewriteCond %{HTTP_HOST} ^(www\.)?neon\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://visalushub.com/the-one-thing-youll-get-only-at-nst-2015/ [L,R=301]
+
+# redirects rockstar.vi.com to http://visalus.com/i-challenge-you
+RewriteCond %{HTTP_HOST} ^(www\.)?rockstar\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://www.visalus.com/i-challenge-you [L,R=301]
+
+# redirects mobile.vi.com to http://vi.com/mobile
+RewriteCond %{HTTP_HOST} ^(www\.)?mobile\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://vi.com/mobile [L,R=302]
+
+# redirects summertime.vi.com/fr to http://www.vi.com/sites/default/files/CS1724CAFR001_Summertime_Challenge_Tracker_r3.pdf
+RewriteCond %{HTTP_HOST} ^(www\.)?summertime\.(visalus|vi)\.com [NC]
+RewriteCond %{REQUEST_URI} ^/fr [NC]
+RewriteRule (.*) http://www.vi.com/sites/default/files/CS1724CAFR001_Summertime_Challenge_Tracker_r3.pdf [L,R=301]
+
+# redirects summertime.vi.com to http://www.vi.com/sites/default/files/CS1724US001_Summertime_Challenge_Tracker_r3.pdf
+RewriteCond %{HTTP_HOST} ^(www\.)?summertime\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://www.vi.com/sites/default/files/CS1724US001_Summertime_Challenge_Tracker_r3.pdf [L,R=301]
+
+# redirects verano.vi.com to http://www.vi.com/sites/default/files/CS1724USSP001_Summertime_Challenge_Tracker_r4.pdf
+RewriteCond %{HTTP_HOST} ^(www\.)?verano\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://www.vi.com/sites/default/files/CS1724USSP001_Summertime_Challenge_Tracker_r4.pdf [L,R=301]
+
+# redirects fiesta.vi.com to http://visalus.com/es/how-host-challenge-party
+RewriteCond %{HTTP_HOST} ^(www\.)?fiesta\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://visalus.com/es/how-host-challenge-party [L,R=301]
+
+# redirects resumen.vi.com to http://results.vi.com
+RewriteCond %{HTTP_HOST} ^(www\.)?resumen\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://www.visalus.com/es/body-by-vi-overview-presentation [L,R=301]
+
+# redirects recompensas.vi.com to http://results.vi.com
+RewriteCond %{HTTP_HOST} ^(www\.)?recompensas\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://www.vi.com/es/recompensas/promoter-rewards [L,R=301]
+
+# redirects pools.vi.com to http://visalus.com/weekly-bonus-pools
+RewriteCond %{HTTP_HOST} ^(www\.)?pools\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://visalus.com/weekly-bonus-pools [L,R=301]
+
+# redirects leadershippools.vi.com to http://visalus.com/weekly-leadership-pools
+RewriteCond %{HTTP_HOST} ^(www\.)?leadershippools\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://visalus.com/weekly-leadership-pools [L,R=301]
+
+# redirects fondos.vi.com to http://visalus.com/weekly-bonus-pools
+RewriteCond %{HTTP_HOST} ^(www\.)?fondos\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://visalus.com/weekly-bonus-pools [L,R=301]
+
+# redirects estrellaenascenso.vi.com to http://visalus.com/es/new-rising-star
+RewriteCond %{HTTP_HOST} ^(www\.)?estrellaenascenso\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://visalus.com/es/new-rising-star [L,R=301]
+
+# redirects fondos.vi.com to http://visalus.com/weekly-bonus-pools
+RewriteCond %{HTTP_HOST} ^(www\.)?fondos\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://visalus.com/weekly-bonus-pools [L,R=301]
+
+# redirects fondos.vi.com to http://visalus.com/weekly-bonus-pools
+RewriteCond %{HTTP_HOST} ^(www\.)?darren\.(visalus|vi)\.com [NC]
+RewriteCond %{REMOTE_ADDR}  10\.189\.245\.5
+RewriteRule ^(.*)$ http://vi.com/de/promoter-rewards [L,R=301]
+
+# redirects eukickoff.vi.com to http://vi.co.uk/british-isles-and-continental-europe
+RewriteCond %{HTTP_HOST} ^(www\.)?eukickoff\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://vi.co.uk/british-isles-and-continental-europe [L,R=301]
+
+# redirects NL.vi.com to http://learn.vi.com/nl
+RewriteCond %{HTTP_HOST} ^(www\.)?nl\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://learn.vi.com/nl [L,R=301]
+
+# redirects gst.vi.com to http://vi.com/getting-started-training
+RewriteCond %{HTTP_HOST} ^(www\.)?gst\.(visalus|vi)\.com [NC]
+RewriteRule (.*) http://visalus.com/getting-started-training [L,R=301]
+
+# redirects vitour.vi.com to http://visalus.com/vi-tour
+RewriteCond %{HTTP_HOST} ^(www\.)?vitour\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://visalus.com/vi-tour [L,R=301]
+
+# redirects 100citytour.vi.com to http://worldslargestchallengeparty.com
+RewriteCond %{HTTP_HOST} ^(www\.)?100citytour\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://worldslargestchallengeparty.com [L,R=301]
+RewriteCond %{HTTP_HOST} ^(www\.)?gira100viudades\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://worldslargestchallengeparty.com/es/ [L,R=301]
+RewriteCond %{HTTP_HOST} ^(www\.)?letour100villes\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://worldslargestchallengeparty.com/fr [L,R=301]
+
+
+#RewriteCond %{HTTP_HOST} ^(www\.)?strategy\.(visalus|vi)\.com [NC]
+#RewriteRule ^(.*)$ http://visalus.com/strategy [L,R=301]
+
+# redirects nst.vi.com to http://visalus.com/nst-fort-lauderdale
+RewriteCond %{HTTP_HOST} ^(www\.)?nst\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://vi.com/uk/nst-europe-2015 [L,R=301]
+
+# redirects 123vip.vi.com to http://vi.com/123-vip
+RewriteCond %{HTTP_HOST} ^(www\.)?123vip\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://vi.com/123-vip/ [L,R=301]
+
+# redirects newcountries.vi.com to http://learn.vi.com/newcountries
+RewriteCond %{HTTP_HOST} ^(www\.)?newcountries\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://learn.vi.com/newcountries [L,R=301]
+
+#RewriteCond %{HTTP_HOST} ^(www\.)?euexpansion\.(visalus|vi)\.com [NC]
+#RewriteRule ^(.*)$ http://learn.vi.com/euexpansion [L,R=301]
+
+# redirects vibites.vi.com to http://vi.com/vibites
+RewriteCond %{HTTP_HOST} ^(www\.)?vibites\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://vi.com/vibites [L,R=301]
+
+# redircts risingstar.vi.com to http://visalus.com/new-rising-star
+RewriteCond %{HTTP_HOST} ^(www\.)?risingstar\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://visalus.com/new-rising-star [L,R=301]
+
+# redircts fi.vi.com to http://learn.vi.com/pi/finland.php
+RewriteCond %{HTTP_HOST} ^(www\.)?fi\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://learn.vi.com/pi/finland.php [L,R=301]
+
+# redircts se.vi.com to http://learn.vi.com/pi/sweden.php
+RewriteCond %{HTTP_HOST} ^(www\.)?se\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://learn.vi.com/pi/sweden.php [L,R=301]
+
+# redircts es.vi.com to http://learn.vi.com/pi/spain.php
+RewriteCond %{HTTP_HOST} ^(www\.)?es\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://learn.vi.com/pi/spain.php [L,R=301]
+
+# redircts bonusbash.vi.com to http://pools.visalus.com
+RewriteCond %{HTTP_HOST} ^(www\.)?bonusbash\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://pools.visalus.com [L,R=301]
+
+# redircts greenfriday.vi.com to http://visalus.com/sites/default/files/promotions/greenfriday/offers_table.pdf
+RewriteCond %{HTTP_HOST} ^(www\.)?greenfriday\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://visalus.com/greenfriday [L,R=301]
+
+# redircts 2015.vi.com to http://visalus.com/2015
+RewriteCond %{HTTP_HOST} ^(www\.)?2015\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://visalus.com/2015 [L,R=301]
+
+# redircts groups.vi.com to http://visalus.com/challenge-groups
+RewriteCond %{HTTP_HOST} ^(www\.)?groups\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://visalus.com/challenge-groups [L,R=301]
+
+# redircts equity.vi.com to http://visalus.com/equity
+RewriteCond %{HTTP_HOST} ^(www\.)?equity\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://visalus.com/equity [L,R=301]
+
+# redirects 3forfree.vi.com to http://visalus.com/body-by-vi/3-free
+RewriteCond %{HTTP_HOST} ^(www\.)?3forfree\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://visalus.com/body-by-vi/3-free [L,R=301]
+
+# redirects project10.vi.com to http://visalus.com/project10
+RewriteCond %{HTTP_HOST} ^(www\.)?project10\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://visalus.com/project10 [L,R=301]
+
+# redirects pools.vi.com to http://visalus.com/weekly-bonus-pools
+RewriteCond %{HTTP_HOST} ^(www\.)?pools\.(visalus|vi)\.com [NC]
+RewriteRule ^(.*)$ http://visalus.com/weekly-bonus-pools [L,R=301]
+
+#Redirect 301 /ca-fr http://visalus.com
+#Redirect 301 /ca http://visalus.com
+
+
+Redirect 301 /nst-fort-lauderdale http://visalus.com/nst-fort-lauderdale-fl-2015
+Redirect 301 /event http://learn.vi.com/event/nl
+Redirect 301 /july-bogo /bogo
+Redirect 301 /en-gb http://vi.co.uk
+Redirect 301 /en-gb/greenfriday /greenfriday
+Redirect 301 /ie/greenfriday /greenfriday
+Redirect 301 /new-national-director http://visalus.com/nd-experience
+Redirect 301 /es/content/new-national-director http://visalus.com/es/nd-experience
+Redirect 301 /promoter-portal/becoming-rising-star http://visalus.com/new-rising-star
+Redirect 301 /for-promoter/presidential-director http://visalus.com/new-presidential-director
+Redirect 301 /new-weekly-bonus-pools http://visalus.com/weekly-bonus-pools
+Redirect 301 /es/new-weekly-bonus-pools http://visalus.com/es/weekly-bonus-pools
+Redirect 301 /fr/new-weekly-bonus-pools http://visalus.com/fr/weekly-bonus-pools
+Redirect 301 /rising-star-promoters http://visalus.com/new-rising-star
+Redirect 301 /how-get-started http://visalus.com/how-to-get-started
+Redirect 301 /latinotour http://visalus.com/latino-tour
+Redirect 301 /rising-star-customer http://visalus.com/rising-star
+Redirect 301 /regional-director-black http://visalus.com/new-regional-director
+Redirect 301 /bimmer-club-lets-rally http://visalus.com/regional-director
+Redirect 301 /ambassador-promoter http://visalus.com/new-ambassador
+Redirect 301 /ambassador-customer http://visalus.com/ambassador-rewards
+Redirect 301 /presidential-director http://visalus.com/new-presidential-director
+Redirect 301 /national-director http://visalus.com/new-national-director
+Redirect 301 /comp-plan-playlist http://visalus.com/top-networker
+Redirect 301 /top-earning-networker http://visalus.com/top-networker
+Redirect 301 /vi-defy-group-offer http://visalus.com
+Redirect 301 /es/vi-defy-grupo-de-oferta http://visalus.com
+Redirect 301 /docs/new/Flyer-ViDefy-RGO.pdf http://visalus.com
+Redirect 301 /microsites/mobile/ http://visalus.com/mobile
+Redirect 301 /mobile http://visalus.com/vinet-mobile
+Redirect 301 /swiperbeta http://visalus.com/vinet-swipe/
+Redirect 301 /national http://visalus.com/nst-los-angeles
+Redirect 301 /sneak-peak http://visalus.com/sneak-peek
+Redirect 301 /take-the-challenge http://visalus.com/landingpage/takethechallenge/
+Redirect 301 /about-visalus/vi-cares http://vicares.org
+Redirect 301 /blog/visalus-news/hulk-hogan-embraces-body-by-vi-90-day-challenge http://blog.visalus.com/challenge-success/visalus-celebrities/hulk-hogan-embraces-the-body-by-vi-90-day-challenge/
+Redirect 301 /products/products-vi http://visalus.com/products/challenge-kits
+Redirect 301 /health/nutrition/ingredients.aspx http://visalus.com/products/challenge-kits
+Redirect 301 /about-visalus/articles-and-newsroom http://visalusblog.com/press/press-releases/
+Redirect 301 /vitality-miami/index.html http://visalus.com/vitality-2014
+Redirect 301 /latino-tour-info http://visalus.com/latino-tour
+Redirect 301 /pre-summer-group-offer http://visalus.com/offers
+Redirect 301 /neuro-group-offer http://visalus.com/offers
+Redirect 301 /about-visalus/executive-team/ryan-blair  http://visalus.com/about-visalus/management-team/ryan-blair
+Redirect 301 /for-promoter/ambassador http://visalus.com/new-ambassador
+Redirect 301 /es/recompensas/bimmer-club http://visalus.com/es/recompensas/recompensas-de-promotores
+Redirect 301 /offer http://visalus.com/offers
+Redirect 301 /community/success-stories  https://www.facebook.com/media/set/?set=a.541426482548136.123983.133497966674325&type=3
+Redirect 301 /nst-los-angeles http://visalus.com/nst-atlanta
+Redirect 301 /latino-tour http://visalus.com/latino/assets/images/latinolaunchflyer.pdf
+Redirect 301 /unase http://viinfo.myvi.net/
+Redirect 301 /influencer-standings-page http://visalus.com/repeat-standings
+Redirect 301 /nst-atlantanst.vi.com http://visalus.com/nst-atlanta
+Redirect 301 /vi-model http://visalus.com/vimodel
+Redirect 301 /submit-your-story http://vichallengeresults.com/
+Redirect 301 /nst-atlanta http://visalus.com/nst-louisville
+Redirect 301 /nst-2014 http://visalus.com/nst-louisville
+Redirect 301 /promoter-portal/upcoming-events http://visalus.com/upcoming-events
+#Redirect 301 /green-friday http://visalus.com
+Redirect 301 /vimodel http://visalus.com/vimodel-winners
+Redirect 301 /es/vimodel http://visalus.com/es/vimodel-winners
+Redirect 301 /fr/vimodel http://visalus.com/fr/vimodel-winners
+#Redirect 301 /pay-near-me http://visalus.com/pay-with-cash
+#Redirect 301 /es/pay-near-me http://visalus.com/es/pay-with-cash
+Redirect 301 /prizes http://visalus.com/challenge-champions
+Redirect 301 /body-by-vi-challenge/get-it-free http://visalus.com/body-by-vi/3-free
+#Redirect 301 /project10 http://visalus.com/body-by-vi/project-10
+Redirect 301 /body-by-vi/project-10 http://visalus.com/project10
+Redirect 301 /body-by-vi/90-day-challenge http://visalus.com/the-challenge
+Redirect 301 /offers http://viurl.cc/rgo/3035 
+Redirect 301 /vitality http://vi.com/vitality-2014
+Redirect 301 /es/vitality http://vi.com/es/vitality-2014
+Redirect 301 /fr/vitality http://vi.com/fr/vitality-2014
+Redirect 301 /products/vibites http://vi.com/vibites
+Redirect 301 /nl/products/vibites http://vi.com/nl/vibites
+Redirect 301 /es/productos/vibites http://vi.com/es/vibites
+Redirect 301 /fr/produits/vibites http://vi.com/fr/vibites
+Redirect 301 /uk/products/vibites http://vi.com/uk/vibites
+Redirect 301 /ie/products/vibites http://vi.com/ie/vibites
+Redirect 301 /de/products/vibites http://vi.com/de/vibites
+Redirect 301 /es/node/213 http://www.visalus.com/es/holidaybonusbash
+Redirect 301 /fi/node/213 http://www.visalus.com/fi/bonus-bash
+Redirect 301 /se/node/213 http://www.visalus.com/se/bonus-bash
+Redirect 301 /es/node/214 http://www.visalus.com/es/holidaybonusbash
+Redirect 301 /de/node/213 http://www.visalus.com/de/bonus-bash
+Redirect 301 /nl/node/213 http://www.visalus.com/nl/bonus-bash
+Redirect 301 /eu-es/node/213 http://www.visalus.com/eu-es/bonus-bash
+Redirect 301 /node/213 http://www.visalus.com/holidaybonusbash
+Redirect 301 /de/content/how-host-challenge-party /de/how-host-challenge-party
+#RewriteCond %{REQUEST_URI} ^/paulrapier[/]?$
+#RewriteRule (.*) /newfolder [R=301,L]
+#Redirect 301 /paulrapier http://visalus.com/pi/findland.php
+Redirect permanent /announce.php http://www.visalus.com/index_junk.html
+Redirect permanent /announce http://www.visalus.com/index_junk.html
+Redirect permanent /wpad.dat http://www.visalus.com/index_junk.html
+Redirect permanent /server/php/files/0Lv__NBcnj4.mp4 http://www.visalus.com/index_junk.html
+Redirect permanent /autodiscover/autodiscover.xml http://mail.vi.com
+Redirect permanent /go.aspx http://www.visalus.com/index_junk.html
+Redirect permanent /summertime-challenge http://checkin.challenge.com/
+#Redirect permanent ^(/fi)$ http://visalus.com/pi/finland.php
+#Redirect permanent ^(/fi)$ http://fi.vi.com
+#Redirect 301 /se http://visalus.com/pi/sweden.php
+#Redirect permanent ^/sp$ http://visalus.com/pi/spain.php
+Redirect permanent ^(/it)$ http://visalus.com/pi/italy.php
+Redirect permanent ^(/pl)$ http://visalus.com/pi/poland.php
+Redirect permanent ^(/eu-es)$ http://visalus.com/pi/spain.php
+RewriteCond %{HTTP_HOST} ^(www\.)?(visalus|vi)\.com [NC]
+RewriteCond %{REQUEST_URI} ^/se$ [NC]
+RewriteRule (.*) http://vi.com/pi/sweden.php [L,R=301]
+RewriteCond %{HTTP_HOST} ^(www\.)?(visalus|vi)\.com [NC]
+RewriteCond %{REQUEST_URI} ^/sp$ [NC]
+RewriteRule (.*) http://vi.com/pi/spain.php [L,R=301]
+RewriteCond %{HTTP_HOST} ^(www\.)?(visalus|vi)\.com [NC]
+RewriteCond %{REQUEST_URI} ^/fi$ [NC]
+RewriteRule (.*) http://vi.com/pi/finland.php [L,R=301]
+RewriteCond %{HTTP_HOST} ^(www\.)?(visalus|vi)\.com [NC]
+RewriteCond %{REQUEST_URI} ^/it$ [NC]
+RewriteRule (.*) http://vi.com/pi/italy.php [L,R=301]
+RewriteCond %{HTTP_HOST} ^(www\.)?(visalus|vi)\.com [NC]
+RewriteCond %{REQUEST_URI} ^/pl$ [NC]
+RewriteRule (.*) http://vi.com/pi/poland.php [L,R=301]
+RewriteCond %{HTTP_HOST} ^(www\.)?(visalus|vi)\.com [NC]
+RewriteCond %{REQUEST_URI} ^/eu-us$ [NC]
+RewriteRule (.*) http://vi.com/pi/spain.php [L,R=301]
+

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>ViSalus&trade; ViCares</title>
+<link rel="stylesheet" href="assets/css/reset.css" />
+<link rel="stylesheet" href="assets/css/style.css" />
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<!-- scroll script  -->
+<script>
+$(document).ready(function(){
+  $(".scroll").click(function(event){
+    event.preventDefault();
+    var offset = $($(this).attr('href')).offset().top;
+    $('html, body').animate({scrollTop:offset}, 500);
+  });
+});
+</script>
+
+<noscript>
+<link rel="stylesheet" href="assets/css/mobile.min.css" />
+</noscript>
+
+
+
+
+<script>
+// Edit to suit your needs.
+var ADAPT_CONFIG = {
+  // Where is your CSS?
+  path: 'assets/css/',
+
+  // false = Only run once, when page first loads.
+  // true = Change on window resize and page tilt.
+  dynamic: true,
+
+  // First range entry is the minimum.
+  // Last range entry is the maximum.
+  // Separate ranges by "to" keyword.
+  range: [
+    '0px    to 760px  = mobile.min.css',
+    '760px  to 980px  = 720.min.css',
+    '980px  to 1280px = 960.min.css',
+    '1280px to 1600px = 1200.min.css',
+    '1600px to 1940px = 1560.min.css',
+    '1940px to 2540px = 1920.min.css',
+    '2540px           = 2520.min.css'
+  ]
+};
+</script>
+
+<!-- responive for 960  -->
+<script src="assets/js/adapt.min.js"></script>
+
+
+<!-- this script keeps the nav in place when you scroll the page  -->
+<script type="text/javascript">
+
+function window_onload() {
+  window.addEventListener("scroll",navbar_reset_top,false);
+}
+
+var navbar_top=100;
+
+function navbar_reset_top() {
+  var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+  if(scrollTop>navbar_top&&navbar.className==="navbar_absolute") {
+    document.getElementById("navbar").className="navbar_fixed";
+  }
+  else if(scrollTop<navbar_top&&navbar.className==="navbar_fixed") {
+    document.getElementById("navbar").className="navbar_absolute";
+  }
+}
+
+</script>
+
+
+
+</head>
+<body>
+<div id="nav" class="no-show">
+	<a class="scroll" href="#one">A CULTURE OF GIVING</a><br />
+	<a class="scroll" href="#two">Vi-CARES</a><br />
+	<a class="scroll" href="#three">Vi-COMMUNITY CHALLENGE</a><br />
+	<a class="scroll" href="#four">THE GREAT COOKIE GIVEAWAY</a><br />
+	<a class="scroll" href="#five">A MILLION MOMENTS OF GIVING</a>
+	
+</div>
+
+<!-- slide 1  -->
+<div class="slide-wrap-1">
+	<div id="slide1" class="container_12">
+		<div class="grid_12 alpha omega">
+		<div class="grid_12 alpha omega">
+			<div class="grid_2 omega">&nbsp;</div>
+			<div class="grid_10 alpha">
+		<a id="one"></a>
+			<div class="vilogo">vicares</div>
+			</div>
+			
+		</div>
+			<div class="grid_5 alpha">&nbsp;</div>
+		
+			<div class="grid_7 omega">
+			<h1><strong class="green-text superbig">A CULTURE OF GIVING</strong></h1>
+			<p class="large">At ViSalus, we believe we're part of something much bigger than ourselves. That's why giving back to the community is central to our mission of 
+<strong>Life, Health</strong> and <strong>Prosperity.</strong></p>
+<p>Whether we’re offering nutritious food, a helping hand or a moment of hope, ViSalus nurtures a culture of giving that starts from the top-down, combining a passion for people with a sense 
+of social responsibility.</p>
+			</div>
+		</div> 
+
+</div> </div><!-- slide 1 -->
+
+<!-- slide 2  -->
+<div class="slide-wrap-2">
+	<div id="slide2" class="container_12">
+		<div class="grid_12 alpha omega">
+			
+		<a id="two"></a>
+			<div class="grid_5 alpha">&nbsp;</div>
+		
+			<div class="grid_7 omega top-3">
+			<div class="grid_1 alpha"><img src="assets/images/visalus_vicares_logo2.png"></div>
+			<div class="grid_6 omega">
+			<p class="white-text large left"><strong class="white-text">A dedication to good health and good nutrition is the cornerstone of ViSalus, but good works are at the heart of everything we do.</strong></p></div>
+			<div class="grid_7 alpha omega">
+			<p class="white-text top">From the beginning, ViSalus founders were committed to making a difference, championing important causes that people care deeply about. And so Vi-Cares was born—a broad philanthropic platform that brings ViSalus Promoters, Customers and employees together to support a range of programs, partners and causes that make a positive impact in the lives of children and families. Reaching out wherever we can, Vi-Cares allows us to share our success with those less fortunate through charitable giving, community service and grassroots initiatives.
+Questions? Please contact us at <a class="white-link" href="mailto:giving@visalus.com">giving@visalus.com</a></p>
+			
+			</div>
+		</div> 
+
+</div></div> <!-- slide 2 -->
+
+
+
+<!-- slide 3  -->
+<div class="slide-wrap-3">
+	<div id="slide3" class="container_12">
+		<div class="grid_12 alpha omega">
+			
+		<a id="three"></a>
+			<div class="grid_5 alpha">&nbsp;</div>
+		
+			<div class="grid_7 omega top-3">
+			<div class="grid_2 alpha"><div><img src="assets/images/visalus_vicares_vicomlogo.png"></div></div>
+			<div class="grid_5 omega">
+			<p class="white-text large left top-2"><a class="btn btn-success btn-large" href="">PROMOTERS GIVE BACK</a></div>
+			<div class="grid_7 alpha omega">
+			<p class="white-text top large">Vi-Cares’ signature giving program is the Vi-Community Challenge, a community outreach program that allows anyone to donate ViSalus Vi-Shape® Nutritional Shake Mix meals to children and families who lack the means to get the nutrition they need.</p>
+			<p class="white-text">Through our Matched Giving Program, ViSalus matches donations meal for meal, without limit, doubling the impact of every donation. Working with more than 145 food banks and youth programs, as well as disaster relief efforts, the ViSalus Community has donated more than two million shake meals to feed children in need throughout the United States and Canada.</p>
+			</div>
+			
+			<div class="grid_3 alpha">
+				<h1 class="green-text">With your help, we can feed millions more.</h1>
+				<p class="white-text">Feeding a child does more than eliminate hunger. It changes lives... gives hope... and shapes the future. If you know of a children’s charity or food bank that could use our help, please let us know at <a href="mailto:giving@visalus.com"> giving@visalus.com</a>.</p>
+				
+			</div>
+			<div class="grid_4 omega scale-with-grid"><img style="height: 309px;" src="assets/images/vishakemix.png"></div>
+		</div> 
+
+</div></div> <!-- slide 3 -->
+
+
+
+<!-- slide 4  -->
+<div class="slide-wrap-4">
+	<div id="slide4" class="container_12">
+		<div class="grid_12 alpha omega">
+			<a id="four"></a>
+		
+			<div class="grid_5 alpha">&nbsp;</div>
+		
+			<div class="grid_7 omega top-3">
+			
+			
+			<h1><strong class="green-text superbig">THE GREAT COOKIE GIVEAWAY</strong></h1>
+			<img src="assets/images/visalus_vicares_infographic.jpg">
+			<div class="grid_7 alpha omega">
+			<p class="top">Our first Vi-Cares initiative honored National Hunger Awareness Month by donating a total of <strong class="green-text">510,880 Nutra-Cookies</strong> to West Virginia’s Huntington Area Food Bank. </p>
+			<p>Members of the Vi-Community were on-site when 420,000 Nutra™-Cookies were donated on a single day, ultimately awarding ViSalus with the world record by Guinness World Records™. 
+More importantly, the mountain of ViSalus Nutra-Cookies gave healthy “mini meals” to more than 97,000 nutritionally deprived individuals in 17 high-need counties.</p>
+<div class="grid_3 alpha"><a class="btn btn-success btn-large" href="http://youtu.be/SuHFD1PPJ5U" target="_blank">WATCH VIDEO</a></div><div class="grid_4 omega">&nbsp;</div>
+			</div>
+		</div> 
+
+</div></div> <!-- slide 4 -->
+
+
+<!-- slide 5  -->
+<div class="slide-wrap-5">
+	<div id="slide5" class="container_12">
+		<div class="grid_12 alpha omega">
+			<a id="five"></a>
+		
+			<div class="grid_5 alpha">&nbsp;</div>
+		
+			<div class="grid_7 omega top-3">
+			
+			
+			<h1><strong class="green-text superbig">A MILLION MOMENTS OF GIVING</strong></h1>
+			<div class="grid_7 alpha omega">
+			<p class="white-text large">Vi-Cares declared December 15, 2012 
+The World’s Largest Giving Day.</p>
+			<p class="white-text">The spirit of giving turned into acts of giving as ViSalus challenged people everywhere to give back in any way they could to anyone who needed it. Countless lives were touched as thousands inspired thousands more to create a million moments of giving and caring.</p>
+			<img src="assets/images/slide5_people.png">
+			
+			</div>
+			<a class="white-link big-link" href="http://givingday.vi.com">givingday.vi.com</a>
+		</div> 
+
+</div></div> <!-- slide 5 -->
+
+</body>
+</html>
+
