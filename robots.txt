@@ -13,13 +13,6 @@
 # For more information about the robots.txt standard, see:
 # http://www.robotstxt.org/robotstxt.html
 
-User-agent: Baiduspider
-User-agent: Baiduspider+
-User-agent: baiduspider
-User-agent: Baiduspider-video
-User-agent: Baiduspider-image
-Disallow: /
-
 User-agent: *
 Crawl-delay: 10
 # Directories
