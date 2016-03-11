@@ -1,0 +1,23 @@
+diff --git a/elfinder.module b/elfinder.module
+index 1f3bde8..6f35f20 100644
+--- a/elfinder.module
++++ b/elfinder.module
+@@ -1215,6 +1215,18 @@ function elfinder_get_drupal_file_obj($uri) {
+       $file->filemime = file_get_mimetype($uri);
+       if (is_file(drupal_realpath($uri))) {
+         $file->filesize = filesize($uri);
++        list($type) = explode("/", $file->filemime);
++
++        switch($type) {
++          case 'image':
++          case 'video':
++            $file->type = $type;
++            break;
++
++          default:
++            $file->type = 'default';
++            break;
++        }
+       }
+       $file->timestamp = REQUEST_TIME;
+       $file->status = FILE_STATUS_PERMANENT;
