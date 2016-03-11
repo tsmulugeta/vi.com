@@ -5,9 +5,12 @@ dependencies[] = locale
 configure = 'admin/structure/block'
 core = 7.x
 
-; Information added by drupal.org packaging script on 2012-06-11
-version = "7.x-1.5"
+files[] = lang_dropdown.module
+files[] = lang_dropdown.install
+
+; Information added by Drupal.org packaging script on 2013-12-15
+version = "7.x-2.5"
 core = "7.x"
 project = "lang_dropdown"
-datestamp = "1339444196"
+datestamp = "1387127905"
 
