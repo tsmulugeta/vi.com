@@ -99,7 +99,10 @@ class kaltura_views_handler_field_kaltura_media extends views_handler_field {
       $settings['kaltura_entry_video_display']['player_height'] = $this->options['height'];
       $settings['kaltura_entry_video_display']['custom_player'] = !empty($this->options['uiconf']) ? $this->options['uiconf'] : '48501'; //TODO: should be defined as a constant
       $settings['delivery'] = $this->options['delivery'];
-      $embed = field_kaltura_build_embed($value, $type, $settings, NULL, NULL, $path);
+      $seometa['description'] = $query['kaltura_description'];
+      $seometa['title'] = $query['kaltura_title'];
+
+      $embed = field_kaltura_build_embed($value, $type, $settings, NULL, NULL, $path, $seometa);
       return theme('kaltura_player_default', array('embed' => $embed, 'title' => $query['kaltura_title'], 'desc' => $query['kaltura_description']));
     }
     else {

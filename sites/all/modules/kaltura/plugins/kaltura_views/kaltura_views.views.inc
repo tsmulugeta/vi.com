@@ -1,18 +1,21 @@
 <?php
-// $Id: kaltura_views.views.inc,v 1.1.2.2 2010/08/28 10:21:00 xuriz Exp $
+/**
+ * @file
+ * Provide views data and handlers for kaltura.module.
+ */
 
-/*
- * Implementation of hook_views_data().
+/**
+ * Implements hook_views_data().
  *
- * Provides the views module with data about node_kaltura table
+ * Provides the views module with data about node_kaltura table.
  * Enables the user to add fields to a view and filter/sort by some fields.
- * Some of the fields have only a field handler, which means they could be added to the "fields" list of the view
- * Others have a filter handler so the view could be filtered by them
+ * Some of the fields have only a field handler, which means they could be
+ * added to the "fields" list of the view. Others have a filter handler so
+ * the view could be filtered by them.
  *
- * The structure of the return value applies the views2 api
+ * The structure of the return value applies the views2 api.
  */
 function kaltura_views_data() {
-
   $data['node_kaltura'] = array(
     'table' => array(
       'group' => 'kaltura',
@@ -38,8 +41,8 @@ function kaltura_views_data() {
         'handler' => 'views_handler_sort',
       ),
       'argument' => array(
-        'handler' => 'views_handler_argument_numeric'
-      )
+        'handler' => 'views_handler_argument_numeric',
+      ),
     ),
     'kstatus' => array(
       'title' => t('Kaltura entry media status'),
@@ -55,8 +58,8 @@ function kaltura_views_data() {
         'handler' => 'views_handler_sort',
       ),
       'argument' => array(
-        'handler' => 'views_handler_argument_numeric'
-      )
+        'handler' => 'views_handler_argument_numeric',
+      ),
     ),
     'kaltura_plays' => array(
       'title' => t('Kaltura item number of plays'),
@@ -223,7 +226,7 @@ function kaltura_views_data() {
       'help' => t('All entry free text'),
       'filter' => array(
         'field' => 'kaltura_title',
-        'handler' => 'kaltura_views_handler_filter_kaltura_text'
+        'handler' => 'kaltura_views_handler_filter_kaltura_text',
       ),
     ),
     'kaltura_title' => array(
@@ -237,7 +240,7 @@ function kaltura_views_data() {
         'handler' => 'views_handler_sort',
       ),
       'filter' => array(
-        'handler' => 'views_handler_filter_string'
+        'handler' => 'views_handler_filter_string',
       ),
     ),
     'kaltura_description' => array(
@@ -250,22 +253,21 @@ function kaltura_views_data() {
         'handler' => 'views_handler_sort',
       ),
       'filter' => array(
-        'handler' => 'views_handler_filter_string'
+        'handler' => 'views_handler_filter_string',
       ),
     ),
-
-  // Expose the owner uid.
-  'kaltura_puser_id' => array(
-    'title' => t('Owner'),
-    'help' => t('Relate a item to the user it belongs to.'),
-    'relationship' => array(
-      'handler' => 'views_handler_relationship',
-      'base' => 'users',
-      'field' => 'uid',
-      'label' => t('Entry owner'),
+    // Expose the owner uid.
+    'kaltura_puser_id' => array(
+      'title' => t('Owner'),
+      'help' => t('Relate a item to the user it belongs to.'),
+      'relationship' => array(
+        'handler' => 'views_handler_relationship',
+        'base' => 'users',
+        'field' => 'uid',
+        'label' => t('Entry owner'),
+      ),
     ),
-  ),
   );
+
   return $data;
 }
-

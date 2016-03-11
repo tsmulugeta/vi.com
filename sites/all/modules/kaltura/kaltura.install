@@ -1,17 +1,14 @@
 <?php
-// $Id: kaltura.install,v 1.2.2.5.2.4 2011/01/17 20:56:17 xuriz Exp $
-
-/*
+/**
  * @file
  * Installation process for kaltura core module
- *
  */
 
 /**
- * Implementation of hook_schema().
+ * Implements hook_schema().
  *
  * Defines the tables and fields in each table that we add to the database
- * to store kaltura data (nodes/notifications...)
+ * to store kaltura data (nodes/notifications...).
  */
 function kaltura_schema() {
   $schema['node_kaltura'] = array(
@@ -104,7 +101,7 @@ function kaltura_schema() {
         'type' => 'int',
         'not null' => FALSE,
       ),
-      // A-sync data fields which should be updated by cron
+      // A-sync data fields which should be updated by cron.
       'kaltura_views' => array(
         'description' => 'The number of times this item was viewed not necessarily played',
         'type' => 'int',
@@ -139,7 +136,7 @@ function kaltura_schema() {
         'description' => 'All the entry/kshow data (serialized) from kaltura received from notification or API call',
         'type' => 'text',
         'default' => NULL,
-        'not null' => FALSE
+        'not null' => FALSE,
       ),
       'kaltura_video_comment' => array(
         'description' => 'was the entry added as a comment for another node or not',
@@ -163,19 +160,19 @@ function kaltura_schema() {
         'description' => 'The entry title',
         'type' => 'text',
         'default' => NULL,
-        'not null' => FALSE
+        'not null' => FALSE,
       ),
       'kaltura_description' => array(
         'description' => 'The entry description',
         'type' => 'text',
         'default' => NULL,
-        'not null' => FALSE
+        'not null' => FALSE,
       ),
       'kaltura_puser_id' => array(
         'description' => 'Uploader user id',
         'type' => 'int',
         'default' => 1,
-        'not null' => TRUE
+        'not null' => TRUE,
       ),
     ),
     'primary key' => array('kaltura_entryid'),
@@ -185,7 +182,8 @@ function kaltura_schema() {
         'columns' => array('kaltura_puser_id' => 'uid'),
       ),
     ),
-    );
+  );
+
   $schema['kaltura_notifications'] = array(
     'description' => 'table to "log" kaltura notifications, to ignore double notifications',
     'fields' => array(
@@ -208,65 +206,115 @@ function kaltura_schema() {
     ),
     'primary key' => array('notification_id'),
   );
+
   return $schema;
 }
 
 /**
- * Implementation of hook_install().
+ * Implements hook_install().
  */
 function kaltura_install() {
-  $_kaltura_client_folder  = drupal_get_path('module', 'kaltura') .'/kaltura_client/';
-  require_once($_kaltura_client_folder .'kaltura_settings.php');
-  drupal_set_message('<b>To '. l('complete installation', 'admin/config/media/kaltura') .' of the Kaltura Video Module installation, '.
-    'you must '. l('associate it with a Kaltura Partner ID', 'admin/config/media/kaltura') .'.</b>');
+  $t = get_t();
+
+  if (!libraries_get_path('KalturaClient')) {
+    drupal_set_message($t('Kaltura client library is not detected. You have to download it to use the Kaltura module. You can do this using Drush command "drush kaltura-client".'), 'warning');
+  }
+
+  $link_path = 'admin/config/media/kaltura';
+  drupal_set_message($t('To !complete_link of the Kaltura Video Module installation, you must !partner_id_link', array(
+    '!complete_link' => l($t('complete installation'), $link_path),
+    '!partner_id_link' => l($t('associate it with a Kaltura Partner ID'), $link_path),
+  )));
 }
 
 /**
- * Implementation of hook_uninstall().
+ * Implemens hook_uninstall().
  */
 function kaltura_uninstall() {
-  // Remove tables.
-  $_kaltura_client_folder  = drupal_get_path('module', 'kaltura') .'/kaltura_client/';
-  require_once($_kaltura_client_folder .'kaltura_settings.php');
-  drupal_uninstall_schema('kaltura');
-  drupal_set_message('Kaltura module was uninstalled.');
-  // get all kaltura_ variables, and delete theme
-  $get_vars = 'SELECT name FROM {variable} WHERE name LIKE :name';
-  $result = db_query($get_vars, array('name' => 'kaltura\_%'));
-  $vars_deleted = '';
-  foreach ($result as $var) {
-    variable_del($var->name);
-    $vars_deleted .= $var->name .',';
-  }
-  watchdog('kaltura', 'the following vars were deleted during uninstall: '. rtrim($vars_deleted, ','));
+  variable_del('kaltura_add_html5');
+  variable_del('kaltura_admin_secret');
+  variable_del('kaltura_last_update');
+  variable_del('kaltura_local_registration');
+  variable_del('kaltura_notification_status');
+  variable_del('kaltura_notification_type');
+  variable_del('kaltura_partner_cms_email');
+  variable_del('kaltura_partner_cms_password');
+  variable_del('kaltura_partner_id');
+  variable_del('kaltura_partner_url2');
+  variable_del('kaltura_secret');
+  variable_del('kaltura_server_url');
+  variable_del('kaltura_subp_id');
+
+  $t = get_t();
+  drupal_set_message($t('Kaltura module was successfully uninstalled.'));
 }
 
-/*
- * Implementation of hook_requirements().
+/**
+ * Implements hook_requirements().
  */
 function kaltura_requirements($phase) {
-  $reqs = array();
-  if (!module_exists('kaltura')) {
-    return $reqs;
-  }
-  $status = variable_get('kaltura_partner_id', '');
-  if (!empty($status)) {
-    $status = 'Configured';
-    $severity = REQUIREMENT_OK;
-    $desc = 'All is ok';
-  }
-  else {
-    $status = 'Not Configured';
-    $severity = REQUIREMENT_ERROR;
-    $desc = 'You did not complete the module configuration. you must configure the module with valid kaltura partner\'s details<br />'.
-      'Or perform registration. Go to '. l('kaltura module settings', 'admin/config/kaltura/general') .' to complete configuration.';
-  }
-  $reqs['kaltura'] = array(
-    'title' => 'Kaltura module',
-    'value' => $status,
-    'severity' => $severity,
-    'description' => $desc,
-    );
-  return $reqs;
-}
+  $requirements = array();
+  $t = get_t();
 
+  if ($phase == 'runtime') {
+    // First check if Libraries module exists
+    if (!drupal_get_path('module', 'libraries')) {
+      $requirements['kaltura'] = array(
+        'title' => t('Kaltura module'),
+        'severity' => REQUIREMENT_ERROR,
+        'value' => t('Libraries module missing'),
+        'description' => $t('Kaltura module requires the <a href="@url">Libraries module</a> to be installed.', array('@url' => 'http://drupal.org/project/libraries')),
+      );
+    }
+    else {
+      // Libraries module exists but may not be installed,
+      // even if it is listed as a dependency in .info file.
+      // For example, during installation from an installation profile
+      // Libraries will *not* be installed when hook_requirements gets called
+      if (!function_exists('libraries_get_path')) {
+        include_once drupal_get_path('module', 'libraries') . '/libraries.module';
+      }
+      if (!libraries_get_path('KalturaClient')) {
+        // KalturaClient is not installed
+        $requirements['kaltura_client'] = array(
+          'title' => $t('Kaltura client library'),
+          'value' => $t('Not detected'),
+          'severity' => REQUIREMENT_ERROR,
+          'description' => $t('Kaltura module requires Kaltura client library to be installed. You can download it using Drush command "drush kaltura-client-install" or manually from !url.', array('!url' => l('this url', 'http://cdnbakmi.kaltura.com/content/clientlibs/php5_16-12-2014.tar.gz', array('attributes' => array('target' => '_blank'))))),
+        );
+      }
+      else {
+        // KalturaClient is installed
+        $library = libraries_detect('KalturaClient');
+        $requirements['kaltura_client'] = array(
+          'title' => $t('Kaltura client library'),
+          'value' => $library['version'],
+          'severity' => REQUIREMENT_OK,
+        );
+
+
+        if (module_exists('kaltura')) {
+          // if modules enabled, check if it was configured yet
+          $status = variable_get('kaltura_partner_id');
+          if (!empty($status)) {
+            $requirements['kaltura'] = array(
+              'title' => $t('Kaltura module'),
+              'value' => $t('Configured'),
+              'severity' => REQUIREMENT_OK,
+            );
+          }
+          else {
+            $requirements['kaltura'] = array(
+              'title' => $t('Kaltura module'),
+              'value' => $t('Not configured'),
+              'severity' => REQUIREMENT_ERROR,
+              'description' => $t('You did not complete the module configuration. You must configure the module with valid kaltura partner details or perform registration. Go to @settings_link to complete configuration.', array('@settings_link' => l($t('kaltura module settings'), 'admin/config/media/kaltura'))),
+            );
+          }
+        }
+      }
+    }
+  }
+
+  return $requirements;
+}

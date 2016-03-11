@@ -5,13 +5,19 @@
  *
  *
  */
-require_once $GLOBALS['_kaltura_client_folder'] . 'KalturaTypes.php';
-require_once $GLOBALS['_kaltura_client_folder'] . 'KalturaClient.php';
-require_once $GLOBALS['_kaltura_client_folder'] . 'KalturaEnums.php';
-require_once $GLOBALS['_kaltura_client_folder'] . 'kaltura_settings.php';
 class KalturaHelpers
 {
-  function getContributionWizardFlashVars($ks, $kshowId, $partner_data, $type, $comment, $simple = false, $uiConf = KalturaSettings_CW_UICONF_ID)
+  function __construct() {
+    if (function_exists('libraries_load')) {
+      libraries_load('KalturaClient');
+    }
+    else {
+      $status_report = l("Status report", 'admin/reports/status');
+      drupal_set_message(t("Kaltura module now requires Libraries module to be installed and enabled. Please follow instructions listed on the $status_report page."), 'error');
+    }
+  }
+
+  function getContributionWizardFlashVars($ks, $kshowId, $partner_data, $type, $comment, $simple = false, $uiConf = KALTURASETTINGS_CW_UICONF_ID)
   {
     $sessionUser = KalturaHelpers::getSessionUser();
     $config = KalturaHelpers::getServiceConfiguration();
@@ -32,7 +38,7 @@ class KalturaHelpers
       $flashVars["subPId"]   = $config->subPartnerId;
     }
 
-    if ($sessionUserId == KalturaSettings_ANONYMOUS_USER_ID) {
+    if ($sessionUser->id == KALTURASETTINGS_ANONYMOUS_USER_ID) {
       $flashVars["isAnonymous"] = true;
     }
 
@@ -49,11 +55,11 @@ class KalturaHelpers
     $flashVars["partnerData"] 	= $partner_data;
 
     if ($simple)
-      $flashVars["uiConfId"] 		= KalturaSettings_CW_UICONF_ID_SIMPLE;
+      $flashVars["uiConfId"] 		= KALTURASETTINGS_CW_UICONF_ID_SIMPLE;
     else if (!$comment)
-      $flashVars["uiConfId"] 		= (empty($uiConf) ? KalturaSettings_CW_UICONF_ID : $uiConf);
+      $flashVars["uiConfId"] 		= (empty($uiConf) ? KALTURASETTINGS_CW_UICONF_ID : $uiConf);
     else
-      $flashVars["uiConfId"] 		= KalturaSettings_CW_COMMENTS_UICONF_ID;
+      $flashVars["uiConfId"] 		= KALTURASETTINGS_CW_COMMENTS_UICONF_ID;
 
     $flashVars["terms_of_use"] 	= "http://corp.kaltura.com/tandc" ;
 
@@ -88,7 +94,7 @@ class KalturaHelpers
     if ($uiConfId)
       $flashVars["uiConfId"] 		= $uiConfId;
     else
-      $flashVars["uiConfId"] 		= KalturaSettings_SE_UICONF_ID;
+      $flashVars["uiConfId"] 		= KALTURASETTINGS_SE_UICONF_ID;
 
     return $flashVars;
   }
@@ -121,7 +127,7 @@ class KalturaHelpers
     if ($uiConfId)
       $flashVars["uiConfId"] 		= $uiConfId;
     else
-      $flashVars["uiConfId"] 		= KalturaSettings_AE_UICONF_ID;
+      $flashVars["uiConfId"] 		= KALTURASETTINGS_AE_UICONF_ID;
 
     return $flashVars;
   }
@@ -155,7 +161,7 @@ class KalturaHelpers
 
   function getSwfUrlForBaseWidget()
   {
-    return KalturaHelpers::getSwfUrlForWidget(KalturaSettings_BASE_WIDGET_ID);
+    return KalturaHelpers::getSwfUrlForWidget(KALTURASETTINGS_BASE_WIDGET_ID);
   }
 
   function getSwfUrlForWidget($widgetId)
@@ -167,7 +173,7 @@ class KalturaHelpers
   {
     if ($uiConfId)
     {
-      if (KalturaSettings_CW_UICONF_ID_SIMPLE == $uiConfId)
+      if (KALTURASETTINGS_CW_UICONF_ID_SIMPLE == $uiConfId)
       {
         return KalturaHelpers::getKalturaServerUrl() . "/kupload/ui_conf_id/" . $uiConfId;
       }
@@ -177,7 +183,7 @@ class KalturaHelpers
       }
     }
     else
-      return KalturaHelpers::getKalturaServerUrl() . "/kcw/ui_conf_id/" . KalturaSettings_CW_UICONF_ID;
+      return KalturaHelpers::getKalturaServerUrl() . "/kcw/ui_conf_id/" . KALTURASETTINGS_CW_UICONF_ID;
   }
 
   function getSimpleEditorUrl($uiConfId = null)
@@ -185,7 +191,7 @@ class KalturaHelpers
     if ($uiConfId)
       return KalturaHelpers::getKalturaServerUrl() . "/kse/ui_conf_id/" . $uiConfId;
     else
-      return KalturaHelpers::getKalturaServerUrl() . "/kse/ui_conf_id/" . KalturaSettings_SE_UICONF_ID;
+      return KalturaHelpers::getKalturaServerUrl() . "/kse/ui_conf_id/" . KALTURASETTINGS_SE_UICONF_ID;
   }
 
   function getAdvancedEditorUrl($uiConfId = null)
@@ -193,7 +199,7 @@ class KalturaHelpers
     if ($uiConfId)
       return KalturaHelpers::getKalturaServerUrl() . "/kae/ui_conf_id/" . $uiConfId;
     else
-      return KalturaHelpers::getKalturaServerUrl() . "/kae/ui_conf_id/" . KalturaSettings_AE_UICONF_ID;
+      return KalturaHelpers::getKalturaServerUrl() . "/kae/ui_conf_id/" . KALTURASETTINGS_AE_UICONF_ID;
   }
 
   function getThumbnailUrl($widgetId = null, $entryId = null, $width = 240, $height= 180)
@@ -242,12 +248,14 @@ class KalturaHelpers
    * @return unknown_type
    */
   function getKalturaServerUrl() {
-    $url = variable_get('kaltura_server_url', KalturaSettings_SERVER_URL);
-    if ($url == '') $url = KalturaSettings_SERVER_URL;
-
-    // remove the last slash from the url
-    if (substr($url, strlen($url) - 1, 1) == '/')
-      $url = substr($url, 0, strlen($url) - 1);
+    $url = variable_get('kaltura_server_url', KALTURASETTINGS_SERVER_URL);
+    $url = $url ? rtrim($url, '/') : rtrim(KALTURASETTINGS_SERVER_URL, '/');
+    if ($GLOBALS['is_https']) {
+      $url = preg_replace('/^\/\//', 'https://', $url, 1);
+    }
+    else {
+      $url = preg_replace('/^\/\//', 'http://', $url, 1);
+    }
     return $url;
   }
 
@@ -271,7 +279,7 @@ class KalturaHelpers
     }
     else
     {
-      $kalturaUser->id = KalturaSettings_ANONYMOUS_USER_ID;
+      $kalturaUser->id = KALTURASETTINGS_ANONYMOUS_USER_ID;
     }
 
     return $kalturaUser;
@@ -290,27 +298,35 @@ class KalturaHelpers
 
     if (empty($players))
     {
-      $players = array();
-      $k_helpers = new KalturaHelpers();
-      $client = $k_helpers->getKalturaClient(true);
-      $listResponse = $client->uiConf->listAction();
-      for ($i=0; $i < $listResponse->totalCount; $i++)
-      {
-        if ($listResponse->objects[$i]->objType == KalturaUiConfObjType::PLAYER)
+      try {
+        $players = array();
+        $k_helpers = new KalturaHelpers();
+        $client = $k_helpers->getKalturaClient(true);
+        $listResponse = $client->uiConf->listAction();
+        for ($i=0; $i < $listResponse->totalCount; $i++)
         {
-          //Don't show playlist as regular player
-          if (stristr($listResponse->objects[$i]->tags, "playlist") != FALSE)
+          if ($listResponse->objects[$i]->objType == KalturaUiConfObjType::PLAYER)
           {
-            continue;
+            //Don't show playlist as regular player
+            if (stristr($listResponse->objects[$i]->tags, "playlist") != FALSE)
+            {
+              continue;
+            }
+            $arr[$listResponse->objects[$i]->id] = array(
+              'name'   => $listResponse->objects[$i]->name,
+              'width'  => $listResponse->objects[$i]->width,
+              'height' => $listResponse->objects[$i]->height
+            );
+            $players[$listResponse->objects[$i]->id] = array(
+              'name'   => $listResponse->objects[$i]->name,
+              'width'  => $listResponse->objects[$i]->width,
+              'height' => $listResponse->objects[$i]->height
+            );
           }
-          $arr[$listResponse->objects[$i]->id] = array('name' => $listResponse->objects[$i]->name,
-            'width' => $listResponse->objects[$i]->width,
-            'height' => $listResponse->objects[$i]->height);
-          $players[$listResponse->objects[$i]->id] = array('name' => $listResponse->objects[$i]->name,
-            'width' => $listResponse->objects[$i]->width,
-            'height' => $listResponse->objects[$i]->height);
-          //         print($listResponse->objects[$i]->tags); //this is a KalturaUiConf object
         }
+      }
+      catch (Exception $e) {
+        watchdog_exception('kaltura', $e);
       }
     }
     else
@@ -355,7 +371,7 @@ class KalturaHelpers
 
     if ($isAdmin)
     {
-      $result = $kalturaClient->session->start($adminSecret, $sessionUser->id, KalturaSessionType::ADMIN, $partnerId,86400, $privileges);
+      $result = $kalturaClient->session->start($adminSecret, $sessionUser->id, KalturaSessionType::ADMIN, $partnerId, 86400, $privileges);
     }
     else
     {
@@ -377,9 +393,10 @@ class KalturaHelpers
   }
 
   function uploadFile ($isAdmin = TRUE, $file, $name) {
-    $kaltura_client = KalturaHelpers::getKalturaClient($isAdmin);
-    $session_user = KalturaHelpers::getSessionUser();
     try {
+      $kaltura_client = KalturaHelpers::getKalturaClient($isAdmin);
+      $session_user = KalturaHelpers::getSessionUser();
+
       $token = $kaltura_client->baseEntry->upload($file);
       $entry = new KalturaBaseEntry();
       $entry ->name = $name;
@@ -392,18 +409,26 @@ class KalturaHelpers
   }
 
   function hasMobileFlavores() {
-    $kaltura_client = KalturaHelpers::getKalturaClient(TRUE);
-    $session_user = KalturaHelpers::getSessionUser();
-    $filter = new KalturaPermissionFilter();
-    $filter->nameEqual= KalturaPermissionName::FEATURE_MOBILE_FLAVORS;
-    // create a permission service object
-    $permissionService = new KalturaPermissionService($kaltura_client);
-    $res = $permissionService->listAction($filter);
-    if ($res->totalCount == 1) { // expected only one permission or no permissions at all
-      if($res->objects[0]->status == KalturaPermissionStatus::ACTIVE) {
-        return TRUE;
+    try {
+      $kaltura_client = KalturaHelpers::getKalturaClient(TRUE);
+      $session_user = KalturaHelpers::getSessionUser();
+      $filter = new KalturaPermissionFilter();
+      // Class KalturaPermissionName don't exist in later versions of client
+      // library, so just replace the needed property with its value.
+      $filter->nameEqual = 'FEATURE_MOBILE_FLAVORS';
+      // create a permission service object
+      $permissionService = new KalturaPermissionService($kaltura_client);
+      $res = $permissionService->listAction($filter);
+      if ($res->totalCount == 1) { // expected only one permission or no permissions at all
+        if($res->objects[0]->status == KalturaPermissionStatus::ACTIVE) {
+          return TRUE;
+        }
       }
     }
+    catch (Exception $e) {
+      watchdog_exception('kaltura', $e);
+    }
+
     return FALSE;
   }
 }
@@ -434,4 +459,3 @@ class KalturaContentCategories
     'Women',
   );
 }
-?>

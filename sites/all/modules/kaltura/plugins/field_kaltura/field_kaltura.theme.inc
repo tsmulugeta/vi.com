@@ -19,7 +19,7 @@ function theme_kaltura_player_default($vars) {
   }
   $out = '<div class="kaltura">';
   $out .= '<h3 class="kaltura-title">' . check_plain($vars['title']) . '</h3>';
-  $out .= '<div class="kaltura-embed">' . $vars['embed']['html'] . '</div>';
+  $out .= '<div class="kaltura-embed">' . render($vars['embed']['html']) . '</div>';
   $out .= '<div class="kaltura-desc">' . check_plain($vars['desc']) . '</div>';
   $out .= '</div>';
   return $out;
@@ -31,7 +31,7 @@ function theme_kaltura_player($vars) {
     drupal_add_js($vars['embed']['js'], 'external');
   }
   $out = '<div class="kaltura">';
-  $out .= '<div class="kaltura-embed">' . $vars['embed']['html'] . '</div>';
+  $out .= '<div class="kaltura-embed">' . render($vars['embed']['html']) . '</div>';
   $out .= '</div>';
   return $out;
 
@@ -43,7 +43,7 @@ function theme_kaltura_player_title($vars) {
   }
   $out = '<div class="kaltura">';
   $out .= '<h3 class="kaltura-title">' . check_plain($vars['title']) . '</h3>';
-  $out .= '<div class="kaltura-embed">' . $vars['embed']['html'] . '</div>';
+  $out .= '<div class="kaltura-embed">' . render($vars['embed']['html']) . '</div>';
   $out .= '</div>';
   return $out;
 }
@@ -54,7 +54,7 @@ function theme_kaltura_player_meta($vars) {
   }
   $out = '<div class="kaltura">';
   $out .= '<h3 class="kaltura-title">' . check_plain($vars['title']) . '</h3>';
-  $out .= '<div class="kaltura-embed">' . $vars['embed']['html'] . '</div>';
+  $out .= '<div class="kaltura-embed">' . render($vars['embed']['html']) . '</div>';
   $out .= '<div class="kaltura-desc">' . check_plain($vars['desc']) . '</div>';
   $out .= '<div class="kaltura-metadata">' . theme('kaltura_metadata', $vars['meta']) . '</div>';
   $out .= '</div>';

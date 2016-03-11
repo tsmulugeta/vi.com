@@ -1,13 +1,83 @@
 (function ($) {
+
+Drupal.kaltura = Drupal.kaltura || {};
+
+/**
+ * Inserts SWF object into HTML element.
+ */
+Drupal.kaltura.insertSWF = function (htmlID, url, swfID, width, height, flashVars, wMode) {
+  var swf = new SWFObject(url, swfID, width, height, "9", "#000000");
+
+  if (wMode) {
+    swf.addParam("wmode", wMode);
+  }
+  swf.addParam("flashVars", flashVars);
+  swf.addParam("allowScriptAccess", "always");
+  swf.addParam("allowFullScreen", "TRUE");
+  swf.addParam("allowNetworking", "all");
+
+  swf.write(htmlID);
+};
+
+/**
+ * @todo: Add doc.
+ */
+Drupal.kaltura.changePlayer = function (vars, uiconf, change_dim) {
+  var url = vars.replace_url.replace("##uiconf##", uiconf);
+
+  var player_width = '0',
+      player_height = '0';
+  if (vars.site_players[uiconf] != undefined) {
+    player_width = vars.site_players[uiconf].width;
+    player_height = vars.site_players[uiconf].height;
+  }
+  if (player_width == '0') {
+    player_width = vars.variable_width;
+  }
+  if (player_height == '0') {
+    player_height = vars.variable_height;
+  }
+
+  Drupal.kaltura.insertSWF(vars.type + '_ph', url, vars.type + '_ph_player', player_width, player_height, '', 'opaque');
+
+  if (change_dim) {
+    $('input[data-kaltura-reflect-width-of-player="' + vars.id + '"]').val(player_width);
+    $('input[data-kaltura-reflect-height-of-player="' + vars.id + '"]').val(player_height);
+  }
+};
+
   Drupal.behaviors.kaltura = {
     attach: function(context, settings) {
+      settings.kaltura = settings.kaltura || {};
+
       $('.remove_media', context).click( function () {
         $(this).parents('.kaltura-thumb-wrap').nextAll().children('input:hidden').val('');
         $(this).parents('.kaltura-thumb-wrap').siblings('a').remove();
         $(this).parents('.kaltura-thumb-wrap').html('');
         });
-      }
 
+      // Insert SWF objects into HTML.
+      settings.kaltura.insertSWF = settings.kaltura.insertSWF || {};
+      $.each(settings.kaltura.insertSWF, function (id, vars) {
+        $('#' + id, context).once('kaltura-insert-swf', function () {
+          Drupal.kaltura.insertSWF(id, vars.url, vars.swfID, vars.width, vars.height, vars.flashVars, vars.wMode);
+        });
+      });
+
+      // Set and change player.
+      settings.kaltura.changePlayer = settings.kaltura.changePlayer || {};
+      $.each(settings.kaltura.changePlayer, function (id, vars) {
+        vars.id = id;
+
+        $('#' + id, context).once('kaltura-entry-widget', function () {
+          Drupal.kaltura.changePlayer(vars, vars.saved_player);
+
+          $(this).change(function () {
+            Drupal.kaltura.changePlayer(vars, $(this).val(), 1);
+          });
+        });
+      });
+    }
   };
     Drupal.behaviors.kaltura_add = {
       attach: function (context, settings) {

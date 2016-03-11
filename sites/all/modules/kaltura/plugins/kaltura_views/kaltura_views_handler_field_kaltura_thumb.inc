@@ -42,25 +42,23 @@ class kaltura_views_handler_field_kaltura_thumb extends views_handler_field {
     $value = $values->{$this->field_alias};
     $width = !empty($this->options['thumbnail_width']) ? $this->options['thumbnail_width'] : 0;
     $height = !empty($this->options['thumbnail_height']) ? $this->options['thumbnail_height'] : 0;
-    $vars['path'] = $value . '/width/' . $width . '/height/' . $height;
-    $thumb = theme('image', $vars);
+
+    $path = $value . '/width/' . $width . '/height/' . $height;
+    $thumb = theme('image', array('path' => $path));
+
     if ($this->options['with_preview']) {
-      $vars['path'] = $value . '/width/' . $width . '/height/' . $height;
-      $vars['attributes'] = array('class' => 'k-prev-rotate');
-      $thumb = theme('image', $vars);
+      $thumb = theme('image', array('path' => $path, 'attributes' => array('class' => 'k-prev-rotate')));
+
       $prev_width = $width * 1.5;
       $prev_height = $height * 1.5;
       $prev_vars['path'] = $value . '/width/' . $prev_width . '/height/' . $prev_height;
       $prev_vars['attributes'] = array('class' => 'k-preview', 'style' => 'display: none;');
       $prev = theme('image', $prev_vars);
-      $out = '<div class="thumb-with-prev">';
-      $out .= $thumb;
-      $out .= $prev;
-      $out .= '</div>';
-      return $out;
-    }
-    return $thumb;
 
+      return '<div class="thumb-with-prev">' . $thumb . $prev . '</div>';
+    }
+
+    return $thumb;
   }
 }
 

@@ -11,15 +11,21 @@ class kaltura_views_handler_filter_media_type extends views_handler_filter_in_op
    * we use only one function to supply our own set of values
    */
   function get_value_options() {
-    $this->value_options = array( 1 => t('Video'), 2 => t('Image'), 5 => t('Audio'));
+    $this->value_options = array(
+      KALTURA_MEDIA_TYPE_VIDEO => t('Video'),
+      KALTURA_MEDIA_TYPE_IMAGE => t('Image'),
+      KALTURA_MEDIA_TYPE_AUDIO => t('Audio'),
+    );
   }
 
   function exposed_form(&$form, &$form_state) {
     parent::exposed_form($form, $form_state);
     $form['kaltura_media_type']['#type'] = 'checkboxes';
-    $form['kaltura_media_type']['#default_value'] = array(1 => 1, 2 => 2, 5 => 5);
-    //$form['kaltura_media_type']['#default_value'] = 'All';
-    //unset($form['kaltura_media_type']['#default_value']);
+    $form['kaltura_media_type']['#default_value'] = array(
+      KALTURA_MEDIA_TYPE_VIDEO => KALTURA_MEDIA_TYPE_VIDEO,
+      KALTURA_MEDIA_TYPE_IMAGE => KALTURA_MEDIA_TYPE_IMAGE,
+      KALTURA_MEDIA_TYPE_AUDIO => KALTURA_MEDIA_TYPE_AUDIO,
+    );
     unset($form['kaltura_media_type']['#multiple']);
     unset($form['kaltura_media_type']['#size']);
   }

@@ -94,7 +94,7 @@ function SendTopToNodePage(){
 }
 
 function SendTopToEntriesPage(){
-  window.top.location.href = goto_url;
+  window.top.location.href = Drupal.settings.kaltura.gotoURL;
 }
 
 
@@ -346,9 +346,30 @@ function update_field_thumbs(hidden_field_obj, kaltura_server) {
 
 }
 
-/*
- *jQuery(document).ready( function () {
- *      var pager = jQuery('.view-kaltura-list-entries .item-list').html();
- *      jQuery('.view-kaltura-list-entries .view-content').before('<div class="item-list">' + pager + '</div>');
- *  });
- */
+function onContributionWizardAfterAddEntry(obj) {
+  var str = obj[0]["entryId"];
+  var type = obj[0]["mediaType"];
+  var mediaTypes = [];
+  mediaTypes[1] = 'Video';
+  mediaTypes[2] = 'Image';
+  mediaTypes[5] = 'Audio';
+
+  jQuery("#" + Drupal.settings.kaltura.kcwField + "-entryid input").val(str);
+  jQuery("#" + Drupal.settings.kaltura.kcwField + "-media-type input").val(type);
+  var t = '<div class="title">Added ' +  mediaTypes[type] + ' </div><div class="kaltura_field_thumb"><img src="' + Drupal.settings.kaltura.thumbnailBaseURL + '/entry_id/' + str + '"/><br/> <input type="button" title="remove item" class="remove_media" /></div>';
+  jQuery("#"+ Drupal.settings.kaltura.kcwField + "-thumb-wrap").html(t);
+
+  Drupal.attachBehaviors();
+}
+
+function onContributionWizardClose(modified) {
+  jQuery(".close").trigger("click");
+  modalContentClose();
+}
+
+jQuery(document).ready(function() {
+  if (window.top.document.getElementById("kaltura_modal_iframe")) {
+    window.top.document.getElementById("kaltura_modal_iframe").className = "";
+    window.top.document.getElementById("kaltura_modal_iframe").scrolling = "no";
+  }
+});

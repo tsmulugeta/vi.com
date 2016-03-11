@@ -1,4 +1,17 @@
-CHANGELOG for Kaltura Module for Drupal 6
+Kaltura 7.x-2.1, 2015-04-07
+---------------------------
+Important! Kaltura module now requires Libraries module to be installed and enabled. We moved Kaltura Client plugin out of the Kaltura module directory into Libraries.
+Before upgrading, please make sure that you have Libraries installed and enabled.
+You can download Kaltura Client library from here and it needs to be placed into sites/all/libraries/KalturaClient/ directory.
+You can also download Kaltura Client using Drush command "drush kaltura-client-install" (available after module upgrade).
+ - #2430519: Use Library API for Kaltura Client plugin
+ - #2254945: Videos will not be displayed on https
+ - #2453925: Add media screen keeps loading
+ - #2420823: Curl SSL verification error.
+ - #2196547: FataFatal error kaltura.admin.inc on line 1294
+ - #1298170: Service "permission" does not exists in KalturaClientBase->throwExceptionIfError() (line 434 of KalturaClientBase.php)
+ - #1256054: Not able to see kaltura data in content
+ - #1090008: Kaltura 2.x-dev cannot work in Drupal 7
 
 Kaltura 2.0
 	oferc:
