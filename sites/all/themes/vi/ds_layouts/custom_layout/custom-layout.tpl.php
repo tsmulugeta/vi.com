@@ -72,7 +72,6 @@
 	  <!-- These comments are required for the Drush command. You can remove them in your own copy -->
 	  <!-- /regions -->
 
-	  <?php print render($content['disqus']); ?> 
 
 </<?php print $layout_wrapper ?>>
 
