@@ -31,15 +31,7 @@ mixpanel.init("ebcf2905959ab33d0ea231e0af477876");</script><!-- end Mixpanel -->
 </head>
 <body<?php print $attributes;?>>
 
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PT985D"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PT985D');</script>
-<!-- End Google Tag Manager -->
+
 
 <div id="fb-root"></div>
   <div id="skip-link">
@@ -55,19 +47,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	})
 </script>
 
-<!-- Optimal retargeting tag -->
-<script type="text/javascript">
-/* <![CDATA[ */
-var optimal_pixel_code = "OAubzrVQNn6hQwI";
-/* ]]> */
-<script type="text/javascript" src="//evjs.optorb.com/js/r1.js">
-</script>
-<noscript>
-<div style="display:inline;">
-<img height="1" width="1" style="border-style:none;" alt=""
-src="//u.optorb.com/m?p=1&r=OAubzrVQNn6hQwI"/>
-</div>
-</noscript>
+
 
 <!-- Google Code for Remarketing tag -->
 <!-- Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. For instructions on adding this tag and more information on the above requirements, read the setup guide: google.com/ads/remarketingsetup -->
