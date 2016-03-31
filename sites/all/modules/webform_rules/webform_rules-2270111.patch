@@ -1,0 +1,16 @@
+diff --git a/webform_rules.module b/webform_rules.module
+index 3327166..e9fcd2f 100644
+--- a/webform_rules.module
++++ b/webform_rules.module
+@@ -209,9 +209,9 @@ function webform_rules_token_info() {
+  */
+ function webform_rules_tokens($type, $tokens, array $data = array(), array $options = array()) {
+   $replacements = array();
+-  if ($type == 'webform' && is_array($data['webform'])) {
++  if ($type == 'webform' && is_object($data['webform'])) {
+     // Get component attributes.
+-    $webform_node = reset($data[$type]);
++    $webform_node = $data[$type];
+     if (empty($webform_node->nid)) {
+       return $replacements;
+     }
