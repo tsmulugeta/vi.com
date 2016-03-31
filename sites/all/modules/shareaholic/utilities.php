@@ -9,7 +9,7 @@ module_load_include('php', 'shareaholic', 'lib/social-share-counts/drupal_http')
 module_load_include('php', 'shareaholic', 'lib/social-share-counts/seq_share_count');
 
 class ShareaholicUtilities {
-  const MODULE_VERSION = '7.x-3.27';
+  const MODULE_VERSION = '7.x-3.28';
   const URL = 'https://shareaholic.com';
   const API_URL = 'https://web.shareaholic.com';
   const CM_API_URL = 'https://cm-web.shareaholic.com';
